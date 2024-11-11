@@ -1,0 +1,269 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.about-section {
+    display: flex;
+    align-items: center;
+    padding: 3em;
+    background-color: #a5d3ff;
+    color: rgb(47, 47, 47);
+}
+
+.about-content {
+    flex: 1;
+    padding-right: 2em;
+}
+
+.about-content h2 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.about-content span {
+    color: #d9ff6f;
+}
+
+.about-content p {
+    margin-top: 1em;
+    font-size: 1.1em;
+    color: #4d4d4d;
+}
+
+.about-image {
+    flex: 1;
+    text-align: center;
+}
+
+.illustration {
+    width: 80%;
+    max-width: 300px;
+    border-radius: 10px;
+}
+
+.about-stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 2em;
+    background-color: #f9f9f9;
+}
+
+.stat-item {
+    text-align: center;
+    max-width: 200px;
+}
+
+.stat-item span {
+    font-size: 2em;
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.stat-item h3 {
+    font-size: 1.2em;
+    color: #333;
+}
+
+.stat-item p {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 0.5em;
+}
+.how-it-works-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 3em 2em;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.how-it-works-image {
+    flex: 1;
+    text-align: center;
+}
+
+.illustration {
+    width: 100%;
+    max-width: 400px;
+}
+
+.how-it-works-content {
+    flex: 1;
+    max-width: 600px;
+    padding-left: 2em;
+}
+
+.how-it-works-content h2 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.how-it-works-content p {
+    margin-top: 1em;
+    font-size: 1.1em;
+    color: #666;
+}
+
+.features-list {
+    list-style: none;
+    margin-top: 1em;
+    line-height: 1.6;
+}
+
+.features-list li {
+    font-size: 1em;
+    color: #333;
+    margin-top: 0.5em;
+}
+
+.features-list li span {
+    font-size: 1.5em;
+    margin-right: 0.5em;
+}
+
+.features-list strong {
+    color: #333;
+}
+
+.app-buttons {
+    display: flex;
+    gap: 1em;
+    margin-top: 1.5em;
+}
+
+.app-store-button,
+.google-play-button {
+    padding: 0.8em 1.5em;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.app-store-button {
+    background-color: #000;
+}
+
+.google-play-button {
+    background-color: #3b8dff;
+}
+
+.app-store-button:hover {
+    background-color: #333;
+}
+
+.google-play-button:hover {
+    background-color: #357ae8;
+}
+h2 {
+    text-align: center;
+    font-size: 2.5em; /* Tăng kích thước chữ */
+    margin-bottom: 0.7em;
+}
+
+p {
+    text-align: center;
+    font-size: 1.2em; /* Tăng kích thước chữ */
+    margin: 0.7em auto;
+    max-width: 800px;
+    color: #666;
+}
+
+/* Company Culture Section */
+.company-culture-section {
+    padding: 2em;
+    background-color: white;
+    text-align: center;
+}
+
+.culture-items {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.5em;
+}
+
+.culture-item {
+    max-width: 250px;
+    text-align: center;
+}
+
+.culture-item h3 {
+    font-size: 1.5em; /* Tăng kích thước chữ */
+    color: #333;
+    margin-bottom: 0.7em;
+}
+
+.culture-item p {
+    font-size: 1em; /* Tăng kích thước chữ */
+    color: #666;
+}
+
+/* Company Values Section */
+.company-values-section {
+    padding: 3em;
+    background-color: #f9f9f9;
+}
+
+.values-items {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-top: 1.5em;
+}
+
+.value-item {
+    flex: 1;
+    min-width: 150px;
+    max-width: 200px;
+    padding: 1.5em;
+    border-radius: 10px;
+    color: rgb(92, 63, 63);
+    text-align: center;
+}
+
+.value-item h3 {
+    font-size: 1.3em; /* Tăng kích thước chữ */
+    margin-bottom: 0.5em;
+}
+
+.value-item p {
+    font-size: 1em; /* Tăng kích thước chữ */
+    color: black;
+}
+
+/* Colors for Value Items */
+.blue {
+    background-color: #4a90e2;
+}
+
+.green {
+    background-color: #6dc066;
+}
+
+.purple {
+    background-color: #a35cc4;
+}
+
+.orange {
+    background-color: #f5a623;
+}
+
+.yellow {
+    background-color: #f7c948;
+}

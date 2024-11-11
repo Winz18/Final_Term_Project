@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="./css/register.css">
+</head>
+<body>
+    <div class="register-section">
+        <!-- Logo và tên website -->
+        <div class="logo-container">
+            <img src="./img/Hisc.jpg" alt="Logo" class="logo">
+            <h1 class="website-name">E-Document</h1>
+        </div>
+
+        <h2>Chào mừng bạn đến với chúng tôi!</h2>
+        <p>Tạo tài khoản để bắt đầu</p>
+        
+        <form class="register-form" action="/register" method="POST">
+            <div class="input-group">
+                <label for="username">Tài khoản</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="input-group">
+                <label for="numberphone">Số điện thoại</label>
+                <input type="tel" id="numberphone" name="numberphone" required>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="birthdate">Ngày sinh</label>
+                <input type="date" id="birthdate" name="birthdate" required>
+            </div>
+
+            <div class="input-group">
+                <label for="status">Trạng thái</label>
+                <select id="status" name="status" required>
+                    <option value="student">Sinh viên</option>
+                    <option value="pupil">Học sinh</option>
+                    <option value="working">Đã đi làm</option>
+                </select>
+            </div>
+
+            <button type="submit" class="register-button">Đăng ký</button>
+        </form>
+
+        <p class="login-link">Đã có tài khoản? <a href="/login">Đăng nhập</a></p>
+    </div>
+</body>
+</html>

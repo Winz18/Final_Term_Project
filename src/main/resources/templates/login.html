@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    <div class="login-section">
+        <!-- Logo và tên website -->
+        <div class="logo-container">
+            <img src="./img/Hisc.jpg" alt="Logo" class="logo rounded-circle">
+            <h1 class="website-name">E-Document</h1>
+        </div>
+
+        <h2>Chào mừng quay trở lại!</h2>
+        <p>Đăng nhập</p>
+        
+        <form class="login-form" action="/login" method="POST">
+            <div class="input-group">
+                <label for="username">Tài khoản</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+        </form>
+        
+        <p class="signup-link">Chưa có tài khoản? <a href="register.html">Đăng ký</a></p>
+    </div>
+</body>
+</html>
