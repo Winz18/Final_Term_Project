@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="../static/css/index.css">
     <style>
         /* To set the background color and centralize the text */
         .intro-section {
@@ -72,154 +72,156 @@
             border-radius: 50%;
             clip-path: ellipse(70% 70% at 50% 50%);
         }
+
         body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-}
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
 
-.stats-section {
-    text-align: center;
-    padding: 2em;
-    background-color: white;
-}
+        .stats-section {
+            text-align: center;
+            padding: 2em;
+            background-color: white;
+        }
 
-.stats-section h2 {
-    font-size: 2em;
-    font-weight: bold;
-}
+        .stats-section h2 {
+            font-size: 2em;
+            font-weight: bold;
+        }
 
-.stats-section p {
-    color: #666;
-    font-size: 1.1em;
-}
+        .stats-section p {
+            color: #666;
+            font-size: 1.1em;
+        }
 
-.stats {
-    display: flex;
-    justify-content: center;
-    gap: 2em;
-    margin-top: 1em;
-}
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2em;
+            margin-top: 1em;
+        }
 
-.stat-item {
-    text-align: center;
-}
+        .stat-item {
+            text-align: center;
+        }
 
-.stat-item h3 {
-    font-size: 2em;
-    margin: 0;
-}
+        .stat-item h3 {
+            font-size: 2em;
+            margin: 0;
+        }
 
-.stat-item p {
-    font-size: 1em;
-    color: #333;
-}
+        .stat-item p {
+            font-size: 1em;
+            color: #333;
+        }
 
-.stat-label {
-    display: inline-block;
-    margin-top: 0.5em;
-    padding: 0.3em 0.7em;
-    font-size: 0.9em;
-    color: white;
-    border-radius: 20px;
-}
+        .stat-label {
+            display: inline-block;
+            margin-top: 0.5em;
+            padding: 0.3em 0.7em;
+            font-size: 0.9em;
+            color: white;
+            border-radius: 20px;
+        }
 
-.purple {
-    background-color: #b19cd9;
-}
+        .purple {
+            background-color: #b19cd9;
+        }
 
-.green {
-    background-color: #8bc34a;
-}
+        .green {
+            background-color: #8bc34a;
+        }
 
-.orange {
-    background-color: #ffa726;
-}
+        .orange {
+            background-color: #ffa726;
+        }
 
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="bg-primary text-white p-3">
-        <div class="container d-flex justify-content-between align-items-center">
-            <h1 class="logo">E-Document</h1>
-            <nav>
-                <ul class="nav">
-                    <li class="nav-item"><a href="#" class="nav-link text-white">Trang chủ</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-white">Tài liệu</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-white">Danh mục</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-white">Tài khoản</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-white">Trợ giúp</a></li>
-                </ul>
-            </nav>
-            <nav>
-                <ul class="nav">
-                    <li class="nav-item"><a href="login.html" class="nav-link text-white">Đăng nhập</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<!-- Header -->
+<header class="bg-primary text-white p-3">
+    <div class="container d-flex justify-content-between align-items-center">
+        <h1 class="logo">E-Document</h1>
+        <nav>
+            <ul class="nav">
+                <li class="nav-item"><a href="#" class="nav-link text-white">Trang chủ</a></li>
+                <li class="nav-item"><a href="#" class="nav-link text-white">Tài liệu</a></li>
+                <li class="nav-item"><a href="#" class="nav-link text-white">Danh mục</a></li>
+                <li class="nav-item"><a href="#" class="nav-link text-white">Tài khoản</a></li>
+                <li class="nav-item"><a href="#" class="nav-link text-white">Trợ giúp</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul class="nav">
+                <li class="nav-item"><a href="login.html" class="nav-link text-white">Đăng nhập</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
-    <!-- Tổng quan về website -->
-    <section class="intro-section">
-        <div class="container position-relative" style="z-index: 2;">
-            <h1>Hãy học cùng nhau</h1>
-            <p>Chia sẻ những điều tốt đẹp với nhau</p>
-        </div>
-    
-        <!-- Decorative Shapes -->
-        <div class="shape-left"></div>
-        <div class="shape-right"></div>
-    </section>
-
-    <!-- Top 5 tài liệu được xem nhiều nhất -->
-    <section class="stats-section">
-        <h3 class="text-center">Top 5 Tài Liệu Được Xem Nhiều Nhất</h3>
-        <div class="row" id="topDocuments">
-            <!-- Document Cards will be inserted here by JavaScript -->
-        </div>
-    </section>
-
-    <!-- Số lượng người dùng trong năm -->
-    <div class="stats-section" style="background-color: #ebebeb;">
-        <h2>10.000 người sử dụng trong tháng</h2>
-        <p>100 tài liệu mới mỗi tuần</p>
-        
-        <div class="stats">
-            <div class="stat-item">
-                <h3>10.000</h3>
-                <p>📄 Tài liệu</p>
-                <span class="stat-label purple">Mỗi 1 phút 1 tài liệu mới</span>
-            </div>
-            
-            <div class="stat-item">
-                <h3>100</h3>
-                <p>🏛 Trường đại học, THPT,...</p>
-                <span class="stat-label green">64 tỉnh thành</span>
-            </div>
-            
-            <div class="stat-item">
-                <h3>500</h3>
-                <p>👤 Người dùng</p>
-                <span class="stat-label orange">Mỗi tuần</span>
-            </div>
-        </div>
+<!-- Tổng quan về website -->
+<section class="intro-section">
+    <div class="container position-relative" style="z-index: 2;">
+        <h1>Hãy học cùng nhau</h1>
+        <p>Chia sẻ những điều tốt đẹp với nhau</p>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white p-4 mt-5">
-        <div class="container text-center">
-            <p>© 2023 E-Document | <a href="#" class="text-white">Điều khoản sử dụng</a> | <a href="#" class="text-white">Chính sách bảo mật</a></p>
-            <div>
-                <a href="#" class="text-white me-2">Facebook</a>
-                <a href="#" class="text-white me-2">LinkedIn</a>
-                <a href="#" class="text-white">Twitter</a>
-            </div>
-        </div>
-    </footer>
+    <!-- Decorative Shapes -->
+    <div class="shape-left"></div>
+    <div class="shape-right"></div>
+</section>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script src="./js/index.js"></script>
+<!-- Top 5 tài liệu được xem nhiều nhất -->
+<section class="stats-section">
+    <h3 class="text-center">Top 5 Tài Liệu Được Xem Nhiều Nhất</h3>
+    <div class="row" id="topDocuments">
+        <!-- Document Cards will be inserted here by JavaScript -->
+    </div>
+</section>
+
+<!-- Số lượng người dùng trong năm -->
+<div class="stats-section" style="background-color: #ebebeb;">
+    <h2>10.000 người sử dụng trong tháng</h2>
+    <p>100 tài liệu mới mỗi tuần</p>
+
+    <div class="stats">
+        <div class="stat-item">
+            <h3>10.000</h3>
+            <p>📄 Tài liệu</p>
+            <span class="stat-label purple">Mỗi 1 phút 1 tài liệu mới</span>
+        </div>
+
+        <div class="stat-item">
+            <h3>100</h3>
+            <p>🏛 Trường đại học, THPT,...</p>
+            <span class="stat-label green">64 tỉnh thành</span>
+        </div>
+
+        <div class="stat-item">
+            <h3>500</h3>
+            <p>👤 Người dùng</p>
+            <span class="stat-label orange">Mỗi tuần</span>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white p-4 mt-5">
+    <div class="container text-center">
+        <p>© 2023 E-Document | <a href="#" class="text-white">Điều khoản sử dụng</a> | <a href="#" class="text-white">Chính
+            sách bảo mật</a></p>
+        <div>
+            <a href="#" class="text-white me-2">Facebook</a>
+            <a href="#" class="text-white me-2">LinkedIn</a>
+            <a href="#" class="text-white">Twitter</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script src="../static/static/js/index.js"></script>
 </body>
 </html>

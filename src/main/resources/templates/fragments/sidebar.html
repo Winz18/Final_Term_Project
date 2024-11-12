@@ -1,0 +1,67 @@
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="sidebar">
+<head>
+    <style>
+        .sidebar {
+            position: fixed;
+            top: 76px;
+            left: 0;
+            bottom: 0;
+            width: 250px;
+            background-color: #0aa8e8;
+            color: white;
+            overflow-y: auto;
+        }
+        .nav-link {
+            color: white;
+        }
+        .nav-item {
+            padding: 10px 0;
+            left: 0;
+        }
+        .username
+        {
+            color: white;
+        }
+        .btn-primary
+        {
+            background-color: #0bda89;
+        }
+    </style>
+</head>
+<div class="d-flex flex-column p-3 sidebar">
+    <h5 th:text="${userName}" class="username">Nguyen Thang Loi</h5>
+    <p class="username">0 Followers | 0 Uploads</p>
+    <button type="button" class="btn btn-primary mb-3 w-100">+ New</button>
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fas fa-book"></i> My Library</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fas fa-question-circle"></i> Ask AI</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fas fa-comments"></i> Chats</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fas fa-history"></i> Recent</a>
+        </li>
+        <!-- Dropdowns for Library Sections -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="collapse" href="#courses" role="button"
+               aria-expanded="false" aria-controls="courses">
+                <i class="fas fa-folder"></i> Courses
+            </a>
+            <div class="collapse" id="courses">
+                <ul class="list-unstyled pl-3">
+                    <li><a href="#" class="nav-link">Course 1</a></li>
+                    <li><a href="#" class="nav-link">Course 2</a></li>
+                </ul>
+            </div>
+        </li>
+        <!-- Repeat similar dropdowns for Books, Studylists, Questions -->
+    </ul>
+</div>
+</html>
