@@ -1,5 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="content">
-<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="/css/home-content.css">
 <div class="container mt-4">
     <!-- Thanh tìm kiếm -->
     <div class="row mb-4">
@@ -16,6 +16,30 @@
         </div>
         <div class="d-flex flex-wrap">
             <!-- Dữ liệu giả, thay thế bằng vòng lặp từ backend -->
+            <div class="card mr-3 mb-3" style="width: 18rem;">
+                <img src="/images/document1.jpg" class="card-img-top" alt="Document Thumbnail">
+                <div class="card-body">
+                    <h5 class="card-title">Sample Document Title</h5>
+                    <p class="card-text">
+                        Author: John Doe<br>
+                        Views: 120<br>
+                        Uploaded: 2024-01-01
+                    </p>
+                    <a href="/view-detail/1" class="btn btn-primary">View</a>
+                </div>
+            </div>
+            <div class="card mr-3 mb-3" style="width: 18rem;">
+                <img src="/images/document1.jpg" class="card-img-top" alt="Document Thumbnail">
+                <div class="card-body">
+                    <h5 class="card-title">Sample Document Title</h5>
+                    <p class="card-text">
+                        Author: John Doe<br>
+                        Views: 120<br>
+                        Uploaded: 2024-01-01
+                    </p>
+                    <a href="/view-detail/1" class="btn btn-primary">View</a>
+                </div>
+            </div>
             <div class="card mr-3 mb-3" style="width: 18rem;">
                 <img src="/images/document1.jpg" class="card-img-top" alt="Document Thumbnail">
                 <div class="card-body">
@@ -52,33 +76,62 @@
                     <a href="/view-detail/2" class="btn btn-primary">View</a>
                 </div>
             </div>
+            <div class="card mr-3 mb-3" style="width: 18rem;">
+                <img src="/images/document2.jpg" class="card-img-top" alt="Document Thumbnail">
+                <div class="card-body">
+                    <h5 class="card-title">Another Sample Document</h5>
+                    <p class="card-text">
+                        Author: Jane Smith<br>
+                        Views: 80<br>
+                        Uploaded: 2024-01-05
+                    </p>
+                    <a href="/view-detail/2" class="btn btn-primary">View</a>
+                </div>
+            </div>
+            <div class="card mr-3 mb-3" style="width: 18rem;">
+                <img src="/images/document2.jpg" class="card-img-top" alt="Document Thumbnail">
+                <div class="card-body">
+                    <h5 class="card-title">Another Sample Document</h5>
+                    <p class="card-text">
+                        Author: Jane Smith<br>
+                        Views: 80<br>
+                        Uploaded: 2024-01-05
+                    </p>
+                    <a href="/view-detail/2" class="btn btn-primary">View</a>
+                </div>
+            </div>
             <!-- Thêm các thẻ card khác cho các tài liệu được đề xuất -->
         </div>
     </div>
 
     <!-- Thông tin tài khoản -->
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card p-3">
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card p-3" >
                 <h5>Followers</h5>
                 <p>Followers this month: 35</p>
                 <!-- Thay bằng: <p th:text="${user.followerCount}">Followers this month: 0</p> -->
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card p-3">
                 <h5>Document Views</h5>
                 <p>Document views this month: 120</p>
                 <!-- Thay bằng: <p th:text="${user.documentViews}">Document views this month: 0</p> -->
             </div>
         </div>
-    </div>
-    <div class="row mt-4">
         <div class="col-md-4">
             <div class="card p-3">
                 <h5>Document Likes</h5>
                 <p>Likes this month: 25</p>
                 <!-- Thay bằng: <p th:text="${user.documentLikes}">Likes this month: 0</p> -->
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h5>Document Comments</h5>
+                <p>Comments this month: 10</p>
+                <!-- Thay bằng: <p th:text="${user.documentComments}">Comments this month: 0</p> -->
             </div>
         </div>
         <div class="col-md-4">

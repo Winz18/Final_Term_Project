@@ -11,7 +11,7 @@ public class test {
         @GetMapping("/test_UI")
         public String home(Model model) {
             model.addAttribute("userName", "Nguyen Thang Loi");  // Truyền dữ liệu cho giao diện
-            return "user/user-home";
+            return "user/my-documents";
         }
     }
 

@@ -1,10 +1,58 @@
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="content">
-<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="/css/my-documents-content.css">
 <div class="container mt-4">
-    <div class="p-3 mb-4" style="background-color: #f9f9ff; border-radius: 8px;">
-        <h2>My Books</h2>
-        <button type="button" class="btn btn-outline-primary">+ Ask AI</button>
+    <div class="documents-container">
+        <!-- Dữ liệu giả, thay thế bằng vòng lặp từ backend -->
+        <div class="document-card">
+            <img src="/images/sample1.jpg" alt="Document Thumbnail">
+            <h5>Document Title 1</h5>
+            <p>Uploaded: 2024-01-01</p>
+            <div class="btn-group">
+                <button class="btn btn-primary">Edit</button>
+                <button class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+
+        <div class="document-card">
+            <img src="/images/sample2.jpg" alt="Document Thumbnail">
+            <h5>Document Title 2</h5>
+            <p>Uploaded: 2024-02-01</p>
+            <div class="btn-group">
+                <button class="btn btn-primary">Edit</button>
+                <button class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+
+        <div class="document-card">
+            <img src="/images/sample3.jpg" alt="Document Thumbnail">
+            <h5>Document Title 3</h5>
+            <p>Uploaded: 2024-03-01</p>
+            <div class="btn-group">
+                <button class="btn btn-primary">Edit</button>
+                <button class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+
+        <div class="document-card">
+            <img src="/images/sample3.jpg" alt="Document Thumbnail">
+            <h5>Document Title 3</h5>
+            <p>Uploaded: 2024-03-01</p>
+            <div class="btn-group">
+                <button class="btn btn-primary">Edit</button>
+                <button class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+
+        <!-- Thêm các ô khác -->
     </div>
+
+    <!-- Phân trang -->
+    <ul class="pagination">
+        <li><a href="?page=1">1</a></li>
+        <li><a href="?page=2">2</a></li>
+        <li><a href="?page=3">3</a></li>
+        <!-- ... -->
+    </ul>
 </div>
 
 

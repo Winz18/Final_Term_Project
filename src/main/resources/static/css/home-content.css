@@ -1,0 +1,69 @@
+.main-content {
+    padding-top: 76px; /* Đảm bảo phần nội dung không bị đè bởi navbar */
+    margin-left: 250px; /* Đảm bảo phù hợp với sidebar */
+}
+
+.card {
+    width: 18rem;
+    margin: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng nhẹ */
+    border-radius: 8px; /* Bo góc */
+}
+
+.card img {
+    height: 150px;
+    object-fit: cover; /* Đảm bảo ảnh vừa khung mà không méo */
+
+}
+
+.btn-primary {
+    background-color: #0bda89; /* Màu nổi bật cho nút bấm */
+}
+
+.card-body h5 {
+    color: #333; /* Màu đen nhạt để rõ ràng trên nền sáng */
+    font-weight: bold; /* Tăng độ đậm để dễ đọc */
+}
+
+.card-body p {
+    color: #555; /* Màu xám đậm cho phần thông tin */
+}
+
+.btn-primary {
+    background-color: #0bda89; /* Giữ màu nút bấm như trước */
+    color: white; /* Chữ trắng trên nút */
+}
+
+.btn-primary:hover {
+    background-color: #0aaf73; /* Tông màu tối hơn khi hover */
+}
+
+.search-bar {
+    position: relative; /* Để đặt biểu tượng bên trong */
+    margin-bottom: 30px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px 10px 40px; /* Khoảng cách để chừa chỗ cho icon */
+    font-size: 1.2rem;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng */
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.search-bar input:focus {
+    border-color: #0bda89; /* Màu nổi bật khi focus */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.search-bar i {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: #aaa;
+}
