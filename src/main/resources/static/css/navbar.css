@@ -1,0 +1,34 @@
+/* Đảm bảo navbar luôn cố định ở trên */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030;
+    height: 76px; /* Độ cao cố định */
+}
+
+ .nav-link {
+     color: white !important;
+     font-size: 1.2rem;
+ }
+
+.navbar-brand {
+    color: white !important;
+}
+
+.mr-3 {
+    color: white !important;
+}
+
+.fa-bell, .fa-user-circle {
+    font-size: 1.5rem;
+}
+
+.nav-item{
+    margin-right: 40px;
+}
+
+.navbar-brand {
+    margin-left: 30px;
+    font-size: 2.5rem;
+}

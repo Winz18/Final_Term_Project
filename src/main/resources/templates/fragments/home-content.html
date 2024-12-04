@@ -1,0 +1,100 @@
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+<link rel="stylesheet" href="/css/navbar.css">
+<div class="container mt-4">
+    <!-- Thanh tìm kiếm -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <input type="text" class="form-control" placeholder="Search for documents...">
+        </div>
+    </div>
+
+    <!-- Tài liệu đã xem gần đây -->
+    <div class="row mb-4">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <h4>Recently Viewed Documents</h4>
+            <a href="/recent-documents" class="btn btn-outline-primary">More</a>
+        </div>
+        <div class="d-flex flex-wrap">
+            <!-- Dữ liệu giả, thay thế bằng vòng lặp từ backend -->
+            <div class="card mr-3 mb-3" style="width: 18rem;">
+                <img src="/images/document1.jpg" class="card-img-top" alt="Document Thumbnail">
+                <div class="card-body">
+                    <h5 class="card-title">Sample Document Title</h5>
+                    <p class="card-text">
+                        Author: John Doe<br>
+                        Views: 120<br>
+                        Uploaded: 2024-01-01
+                    </p>
+                    <a href="/view-detail/1" class="btn btn-primary">View</a>
+                </div>
+            </div>
+            <!-- Thêm các thẻ card khác cho các tài liệu đã xem -->
+        </div>
+    </div>
+
+    <!-- Tài liệu được đề xuất -->
+    <div class="row mb-4">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <h4>Recommended Documents</h4>
+            <a href="/recommended-documents" class="btn btn-outline-primary">More</a>
+        </div>
+        <div class="d-flex flex-wrap">
+            <!-- Dữ liệu giả, thay thế bằng vòng lặp từ backend -->
+            <div class="card mr-3 mb-3" style="width: 18rem;">
+                <img src="/images/document2.jpg" class="card-img-top" alt="Document Thumbnail">
+                <div class="card-body">
+                    <h5 class="card-title">Another Sample Document</h5>
+                    <p class="card-text">
+                        Author: Jane Smith<br>
+                        Views: 80<br>
+                        Uploaded: 2024-01-05
+                    </p>
+                    <a href="/view-detail/2" class="btn btn-primary">View</a>
+                </div>
+            </div>
+            <!-- Thêm các thẻ card khác cho các tài liệu được đề xuất -->
+        </div>
+    </div>
+
+    <!-- Thông tin tài khoản -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card p-3">
+                <h5>Followers</h5>
+                <p>Followers this month: 35</p>
+                <!-- Thay bằng: <p th:text="${user.followerCount}">Followers this month: 0</p> -->
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card p-3">
+                <h5>Document Views</h5>
+                <p>Document views this month: 120</p>
+                <!-- Thay bằng: <p th:text="${user.documentViews}">Document views this month: 0</p> -->
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h5>Document Likes</h5>
+                <p>Likes this month: 25</p>
+                <!-- Thay bằng: <p th:text="${user.documentLikes}">Likes this month: 0</p> -->
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h5>Downloads</h5>
+                <p>Downloads this month: 45</p>
+                <!-- Thay bằng: <p th:text="${user.documentDownloads}">Downloads this month: 0</p> -->
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h5>Revenue</h5>
+                <p>$15.00 earned this month</p>
+                <!-- Thay bằng: <p th:text="${user.revenue}">$0.00 earned this month</p> -->
+            </div>
+        </div>
+    </div>
+</div>
+</html>
