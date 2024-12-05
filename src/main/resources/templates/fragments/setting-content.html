@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+<link rel="stylesheet" href="/css/setting.css">
+<div class="settings-container">
+    <h3>Settings</h3>
+
+    <!-- Change Password -->
+    <div class="setting-section">
+        <label for="current-password">Current Password</label>
+        <input type="password" id="current-password" placeholder="Enter current password">
+
+        <label for="new-password">New Password</label>
+        <input type="password" id="new-password" placeholder="Enter new password">
+
+        <button onclick="savePassword()">Save Password</button>
+    </div>
+
+    <!-- Email Preferences -->
+    <div class="setting-section">
+        <label>
+            <input type="checkbox" id="email-preferences" checked>
+            Receive promotional emails
+        </label>
+        <button onclick="savePreferences()">Save Preferences</button>
+    </div>
+
+    <!-- Display Mode -->
+    <div class="setting-section">
+        <label for="display-mode">Display Mode</label>
+        <select id="display-mode">
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+        </select>
+        <button onclick="saveDisplayMode()">Save Display Mode</button>
+    </div>
+
+    <!-- Language -->
+    <div class="setting-section">
+        <label for="language">Language</label>
+        <select id="language">
+            <option value="en">English</option>
+            <option value="vi">Vietnamese</option>
+        </select>
+        <button onclick="saveLanguage()">Save Language</button>
+    </div>
+
+    <!-- Delete Account -->
+    <div class="delete-account">
+        <button onclick="deleteAccount()">Delete Account</button>
+    </div>
+</div>
+<script src="/js/setting.js"></script>
+</html>

@@ -1,0 +1,86 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.profile-info {
+    width: 100%;
+    max-width: 600px;
+    background: #f9f9ff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.profile-info h5 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.profile-info p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.edit-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #0bda89;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.3s ease-in-out;
+}
+
+.edit-button:hover {
+    background: #0aa879;
+}
+
+.edit-form {
+    display: none;
+}
+
+.edit-form.active {
+    display: block;
+}
+
+.edit-form input,
+.edit-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.edit-form button {
+    padding: 10px 20px;
+    background: #106cfc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.edit-form button:hover {
+    background: #0b56c0;
+}

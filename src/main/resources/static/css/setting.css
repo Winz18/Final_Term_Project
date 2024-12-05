@@ -1,0 +1,72 @@
+.settings-container {
+    margin-top: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #f9f9ff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.settings-container h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.setting-section {
+    margin-bottom: 20px;
+}
+
+.setting-section label {
+    font-size: 1rem;
+    color: #555;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.setting-section input[type="text"],
+.setting-section input[type="password"],
+.setting-section select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+.setting-section input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.setting-section button {
+    padding: 10px 20px;
+    background: #106cfc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.setting-section button:hover {
+    background: #0b56c0;
+}
+
+.delete-account {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.delete-account button {
+    background: #ff4d4d;
+    color: white;
+}
+
+.delete-account button:hover {
+    background: #cc0000;
+}
