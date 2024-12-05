@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>BON</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- Navbar -->
+<header th:insert="fragments/navbar :: navbar"></header>
+
+<!-- Main Content with Sidebar and Main Section -->
+<div class="d-flex flex-grow-1">
+    <!-- Sidebar -->
+    <aside th:insert="fragments/sidebar :: sidebar"></aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow-1 p-4" style="margin-left: 300px; margin-top: 76px">
+        <section th:insert="fragments/edit-doc :: content"></section>
+    </main>
+</div>
+
+<!-- Footer -->
+<footer th:insert="fragments/footer :: footer"></footer>
+
+</body>
+</html>

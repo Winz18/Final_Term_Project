@@ -133,3 +133,18 @@
     color: #333;
     margin-bottom: 5px;
 }
+
+.owner-actions button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background: #ffc107;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.owner-actions button:hover {
+    background: #e0a800;
+}

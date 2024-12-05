@@ -26,3 +26,9 @@ function postComment() {
         alert('Please write a comment before posting.');
     }
 }
+
+function editDocument() {
+    alert('Redirecting to the document editing page...');
+    // Chuyển hướng đến trang chỉnh sửa nội dung tài liệu
+    window.location.href = "/edit-document";
+}
