@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
-    <link rel="stylesheet" href="../static/css/aboutus.css">
+    <link rel="stylesheet" href="/css/aboutus.css">
 </head>
-<body>
-    <section class="about-section">
+<body class="d-flex flex-column min-vh-100">
+<!-- Navbar -->
+<header th:insert="fragments/navbar :: navbar"></header>
+
+    <section class="about-section mt-5">
         <div class="about-content">
             <h2>Our mission is to <span>empower everyone to excel at their studies.</span></h2>
             <p>We are committed to providing resources that help students achieve their academic goals.</p>
@@ -104,5 +109,7 @@
             </div>
         </div>
     </section>
+<footer th:insert="fragments/footer :: footer"></footer>
+
 </body>
 </html>

@@ -1,113 +1,26 @@
-* {
+html, body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #f4f4f4;
-}
-
-.login-section {
-    text-align: center;
-    background-color: rgb(190, 240, 255);
-    padding: 2em;
-    width: 90%;
-    max-width: 400px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.logo-container {
-    margin-bottom: 1em;
-}
-
-.logo {
-    width: 60px;
-    height: 60px;
-}
-
-.website-name {
-    font-size: 1.5em;
-    color: #333;
-    font-weight: bold;
-    margin-top: 0.5em;
-}
-
-.login-section h2 {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 0.5em;
-}
-
-.login-section p {
-    color: #666;
-    margin-bottom: 1.5em;
-}
-
-.login-form {
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.input-group {
-    margin-bottom: 1em;
-    text-align: left;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
 }
 
-.input-group label {
-    font-size: 0.9em;
-    color: #333;
-    margin-bottom: 0.3em;
-    display: block;
+/* Content wrapper để đẩy footer xuống */
+.login-section {
+    flex: 1; /* Đẩy nội dung để footer luôn nằm cuối */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
-.input-group input {
-    width: 100%;
-    padding: 0.8em;
-    font-size: 1em;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    outline: none;
-}
-
-.input-group input:focus {
-    border-color: #4a90e2;
-}
-
-.login-button {
-    padding: 0.8em;
-    font-size: 1em;
-    font-weight: bold;
-    color: white;
-    background-color: #4a90e2;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.login-button:hover {
-    background-color: #357ab8;
-}
-
-.signup-link {
-    margin-top: 1em;
-    font-size: 0.9em;
-    color: #666;
-}
-
-.signup-link a {
-    color: #4a90e2;
-    text-decoration: none;
-}
-
-.signup-link a:hover {
-    text-decoration: underline;
+/* Footer styles */
+footer {
+    margin-top: auto; /* Đẩy footer xuống cuối */
 }
