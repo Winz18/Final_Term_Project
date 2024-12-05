@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users and Documents</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Navbar -->
+<header th:insert="fragments/navbar :: navbar"></header>
+
+<!-- Main Content with Sidebar and Main Section -->
+<div class="d-flex flex-grow-1">
+    <!-- Sidebar -->
+    <aside th:insert="fragments/admin-sidebar :: sidebar"></aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow-1 p-4" style="margin-left: 300px; margin-top: 76px">
+        <div class=" mt-5">
+            <!-- Page Title -->
+            <div class="row">
+                <div class="col-12" >
+                    <h1 class="mb-4">Hoa hồng cho người dùng </h1>
+                    <p class="text-muted">1000 Views tương đương 5000VNĐ</p>
+                </div>
+            </div>
+
+            <!-- Pro Users Table -->
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h4 mb-3">Bảng chiết khấu</h2>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Total Views</th>
+                            <th>Amount Earned (VNĐ)</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>john@example.com</td>
+                            <td>15,000</td>
+                            <td>75,000</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">View Details</button>
+                                <button class="btn btn-success btn-sm">Approve Payment</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jane Smith</td>
+                            <td>jane@example.com</td>
+                            <td>10,500</td>
+                            <td>52,500</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">View Details</button>
+                                <button class="btn btn-success btn-sm">Approve Payment</button>
+                            </td>
+                        </tr>
+                        <!-- More Pro Users -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<!-- Footer -->
+<footer th:insert="fragments/footer :: footer"></footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+#wrapper {
+    display: flex;
+}
+
+.sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    height: 100vh;
+}
+
+#page-content-wrapper {
+    flex: 1;
+    overflow-x: hidden;
+}
