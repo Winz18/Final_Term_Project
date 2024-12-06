@@ -32,6 +32,7 @@ public class User {
     private String bio;
     private boolean isAdmin;
     private boolean isActive;
+    private boolean isVIP;
 
     @Column(name = "last_login")
     private LocalDateTime lastLogin;

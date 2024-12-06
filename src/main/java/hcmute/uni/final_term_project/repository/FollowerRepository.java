@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface FollowRepository extends JpaRepository<Follower, Long> {
+public interface FollowerRepository extends JpaRepository<Follower, Long> {
 
     // Tìm tất cả những người dùng mà user đang theo dõi
     List<Follower> findByFollower(User follower);
