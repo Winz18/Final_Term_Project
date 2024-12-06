@@ -1,12 +1,13 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Users and Documents</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <!-- Navbar -->
 <header th:insert="fragments/navbar :: navbar"></header>
 
@@ -18,40 +19,47 @@
     <!-- Main Content Area -->
     <main class="flex-grow-1 p-4" style="margin-left: 300px; margin-top: 76px">
         <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Category Management</title>
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        </head>
         <body>
         <div class="">
             <!-- Page Title -->
             <div class="row">
                 <div class="col-12">
-                    <h1 class="mb-4">Category Management</h1>
+                    <h1 class="mb-4">Quản lý danh mục</h1>
                 </div>
             </div>
-
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <!-- Search Bar -->
+                    <input type="text" class="form-control" id="categorySearch" placeholder="Tìm kiếm danh mục theo tên...">
+                </div>
+                <div class="col-md-6 text-end">
+                    <!-- Filter Options -->
+                    <select class="form-select w-auto d-inline-block" id="categoryFilter">
+                        <option value="">Lọc theo...</option>
+                        <option value="name">Tên danh mục</option>
+                        <option value="date">Ngày tạo</option>
+                    </select>
+                    <button class="btn btn-primary ms-2">Áp dụng</button>
+                </div>
+            </div>
             <!-- Add New Category -->
             <div class="row mb-4">
                 <div class="col-md-8 ">
                     <div class="card">
                         <div class="card-header bg-dark text-white">
-                            Add New Category
+                            Thêm danh mục
                         </div>
                         <div class="card-body">
                             <form>
                                 <div class="mb-3">
-                                    <label for="categoryName" class="form-label">Category Name</label>
+                                    <label for="categoryName" class="form-label">Tên danh mục</label>
                                     <input type="text" id="categoryName" class="form-control" placeholder="Enter category name">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="categoryDescription" class="form-label">Category Description</label>
+                                    <label for="categoryDescription" class="form-label">Mô tả</label>
                                     <textarea id="categoryDescription" class="form-control" rows="3" placeholder="Enter category description"></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Add Category</button>
+                                <button type="submit" class="btn btn-primary">Thêm</button>
                             </form>
                         </div>
                     </div>
@@ -61,15 +69,16 @@
             <!-- Categories Table -->
             <div class="row">
                 <div class="col-12">
-                    <h2 class="h4 mb-3">Existing Categories</h2>
+                    <h2 class="h4 mb-3">Các danh mục hiện có</h2>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
                         <tr>
                             <th>#</th>
-                            <th>Category Name</th>
-                            <th>Description</th>
-                            <th>Created Date</th>
-                            <th>Actions</th>
+                            <th>Tên</th>
+                            <th>Mô tả</th>
+                            <th>Ngày tạo</th>
+                            <th>Số lượng bài viết</th>
+                            <th>Hành động</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -78,6 +87,7 @@
                             <td>Science</td>
                             <td>Documents related to scientific studies</td>
                             <td>2023-12-01</td>
+                            <td>25</td>
                             <td>
                                 <button class="btn btn-primary btn-sm">Edit</button>
                                 <button class="btn btn-danger btn-sm">Delete</button>
@@ -88,6 +98,7 @@
                             <td>Technology</td>
                             <td>Documents related to technology</td>
                             <td>2023-12-02</td>
+                            <td>15</td>
                             <td>
                                 <button class="btn btn-primary btn-sm">Edit</button>
                                 <button class="btn btn-danger btn-sm">Delete</button>

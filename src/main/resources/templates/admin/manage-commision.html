@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Users and Documents</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <!-- Navbar -->
 <header th:insert="fragments/navbar :: navbar"></header>
 
@@ -17,26 +17,49 @@
 
     <!-- Main Content Area -->
     <main class="flex-grow-1 p-4" style="margin-left: 300px; margin-top: 76px">
-        <div class=" mt-5">
+        <div class="mt-5">
             <!-- Page Title -->
             <div class="row">
-                <div class="col-12" >
-                    <h1 class="mb-4">Hoa hồng cho người dùng </h1>
-                    <p class="text-muted">1000 Views tương đương 5000VNĐ</p>
+                <div class="col-12">
+                    <h1 class="mb-4">User Commission Management</h1>
+                    <p class="text-muted">1 download equals 500 VNĐ</p>
                 </div>
             </div>
 
-            <!-- Pro Users Table -->
+            <!-- Search and Filter -->
+            <div class="row mb-4">
+                <!-- Search -->
+                <div class="col-md-6">
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="searchInput"
+                            placeholder="Search by name, email..."
+                            onkeyup="searchCommission()"
+                    />
+                </div>
+                <!-- Filter -->
+                <div class="col-md-6">
+                    <select class="form-select w-auto d-inline-block" id="filterComboBox" onchange="filterCommission()">
+                        <option value="">Filter by...</option>
+                        <option value="name">Name</option>
+                        <option value="downloads">Download Count</option>
+                        <option value="amount">Earnings</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Commission Table -->
             <div class="row">
                 <div class="col-12">
-                    <h2 class="h4 mb-3">Bảng chiết khấu</h2>
-                    <table class="table table-bordered table-striped">
+                    <h2 class="h4 mb-3">Commission Table</h2>
+                    <table class="table table-bordered table-striped" id="commissionTable">
                         <thead class="table-dark">
                         <tr>
                             <th>#</th>
                             <th>User Name</th>
                             <th>Email</th>
-                            <th>Total Views</th>
+                            <th>Total Downloads</th>
                             <th>Amount Earned (VNĐ)</th>
                             <th>Actions</th>
                         </tr>
@@ -46,7 +69,7 @@
                             <td>1</td>
                             <td>John Doe</td>
                             <td>john@example.com</td>
-                            <td>15,000</td>
+                            <td>150</td>
                             <td>75,000</td>
                             <td>
                                 <button class="btn btn-primary btn-sm">View Details</button>
@@ -57,14 +80,36 @@
                             <td>2</td>
                             <td>Jane Smith</td>
                             <td>jane@example.com</td>
-                            <td>10,500</td>
+                            <td>105</td>
                             <td>52,500</td>
                             <td>
                                 <button class="btn btn-primary btn-sm">View Details</button>
                                 <button class="btn btn-success btn-sm">Approve Payment</button>
                             </td>
                         </tr>
-                        <!-- More Pro Users -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Commission Summary -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h2 class="h4 mb-3">Commission Summary</h2>
+                    <table class="table table-bordered">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>Total Commission (VNĐ)</th>
+                            <th>Pending (VNĐ)</th>
+                            <th>Approved (VNĐ)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td id="totalCommission">0</td>
+                            <td id="pendingCommission">0</td>
+                            <td id="approvedCommission">0</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -74,7 +119,33 @@
 </div>
 <!-- Footer -->
 <footer th:insert="fragments/footer :: footer"></footer>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const rows = document.querySelectorAll('#commissionTable tbody tr');
+        let totalCommission = 0;
+        let pendingCommission = 0;
+        let approvedCommission = 0;
 
-</div>
+        rows.forEach(row => {
+            const amountEarned = parseInt(row.cells[4].textContent.replace(/,/g, ''));
+
+            // Total Commission
+            totalCommission += amountEarned;
+
+            // Assume if "Approve Payment" button exists, it's pending
+            const isPending = row.querySelector('.btn-success').textContent.includes('Approve Payment');
+            if (isPending) {
+                pendingCommission += amountEarned;
+            } else {
+                approvedCommission += amountEarned;
+            }
+        });
+
+        // Update the summary table
+        document.getElementById('totalCommission').textContent = totalCommission.toLocaleString('vi-VN');
+        document.getElementById('pendingCommission').textContent = pendingCommission.toLocaleString('vi-VN');
+        document.getElementById('approvedCommission').textContent = approvedCommission.toLocaleString('vi-VN');
+    });
+</script>
 </body>
 </html>

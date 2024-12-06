@@ -1,0 +1,227 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Website</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<!-- Navbar -->
+<header th:insert="fragments/navbar :: navbar"></header>
+
+<!-- Main Content with Sidebar and Main Section -->
+<div class="d-flex flex-grow-1">
+    <!-- Sidebar -->
+    <aside th:insert="fragments/admin-sidebar :: sidebar"></aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow-1 p-4" style="margin-left: 300px; margin-top: 76px">
+        <div class="mt-5">
+            <!-- Title -->
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="mb-4">Manage Documents</h1>
+                </div>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <!-- Search Bar -->
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="documentSearch"
+                            placeholder="Search..."
+                    />
+                </div>
+                <div class="col-md-6 text-end">
+                    <!-- Filter Combo Box -->
+                    <select class="form-select w-auto d-inline-block" id="documentFilter">
+                        <option value="">Filter by...</option>
+                        <option value="fileType">File Type</option>
+                        <option value="size">File Size</option>
+                        <option value="path">Path</option>
+                        <option value="dateUpload">Upload Date</option>
+                        <option value="downloads">Downloads</option>
+                        <option value="isVIP">VIP Document</option>
+                        <option value="background">Content</option>
+                        <option value="university">University</option>
+                        <option value="views">Views</option>
+                        <option value="categoryTag">Category Tag</option>
+                        <option value="ownerId">Owner ID</option>
+                        <option value="likes">Likes</option>
+                        <option value="comments">Comments</option>
+                    </select>
+                    <button class="btn btn-primary ms-2" onclick="applyFilter()">Apply</button>
+                </div>
+            </div>
+
+            <!-- Document Table -->
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h4 mb-3">Document List</h2>
+                    <div class="d-flex mb-3">
+                        <button class="btn btn-success me-2" onclick="openAddDocumentForm()">Add Document</button>
+                        <button class="btn btn-secondary ml-3" onclick="exportToExcel()">Export to Excel</button>
+                    </div>
+                    <table class="table table-bordered table-striped" id="documentTable">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Document ID</th>
+                            <th>File Info</th>
+                            <th>Document Details</th>
+                            <th>Statistics</th>
+                            <th>Owner ID</th>
+                            <th>Is VIP</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>DOC001</td>
+                            <td>
+                                Type: PDF<br>
+                                Size: 1.5 MB<br>
+                                Path: /documents/science/doc1.pdf
+                            </td>
+                            <td>
+                                Background: Introduction to Physics<br>
+                                University: MIT<br>
+                                Category: Science
+                            </td>
+                            <td>
+                                Downloads: 50<br>
+                                Views: 120<br>
+                                Likes: 75<br>
+                                Comments: 15
+                            </td>
+                            <td>USR001</td>
+                            <td>Yes</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">View</button>
+                                <button class="btn btn-warning btn-sm" onclick="openEditDocumentForm('DOC001')">Edit</button>
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>DOC002</td>
+                            <td>
+                                Type: DOCX<br>
+                                Size: 2.2 MB<br>
+                                Path: /documents/tech/doc2.docx
+                            </td>
+                            <td>
+                                Background: Advanced Algorithms<br>
+                                University: Stanford<br>
+                                Category: Technology
+                            </td>
+                            <td>
+                                Downloads: 30<br>
+                                Views: 80<br>
+                                Likes: 45<br>
+                                Comments: 10
+                            </td>
+                            <td>USR002</td>
+                            <td>No</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">View</button>
+                                <button class="btn btn-warning btn-sm" onclick="openEditDocumentForm('DOC002')">Edit</button>
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+<!--            category table-->
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h4 mb-3">Existing Categories</h2>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Creation Date</th>
+                            <th>Number of Posts</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Science</td>
+                            <td>Documents related to scientific studies</td>
+                            <td>2023-12-01</td>
+                            <td>25</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">Edit</button>
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Technology</td>
+                            <td>Documents related to technology</td>
+                            <td>2023-12-02</td>
+                            <td>15</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">Edit</button>
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                        <!-- Add more categories here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
+<!-- Form -->
+<div class="modal fade" id="documentFormModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="documentForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="documentFormTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="documentId" class="form-label">Document ID</label>
+                        <input type="text" class="form-control" id="documentId" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fileType" class="form-label">File Type</label>
+                        <select class="form-control" id="fileType" required>
+                            <option value="PDF">PDF</option>
+                            <option value="DOCX">DOCX</option>
+                            <option value="TXT">TXT</option>
+                        </select>
+                    </div>
+                    <!-- Other form fields omitted for brevity -->
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    // JavaScript remains unchanged.
+</script>
+<footer th:insert="fragments/footer :: footer"></footer>
+</body>
+</html>

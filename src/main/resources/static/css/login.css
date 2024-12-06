@@ -24,3 +24,53 @@ body {
 footer {
     margin-top: auto; /* Đẩy footer xuống cuối */
 }
+/* Background and overall alignment */
+body {
+    background-color: #f7f9fc;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Login Container */
+.login-section {
+    height: 100vh;
+    padding: 20px;
+}
+
+.login-form-container {
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Form Inputs */
+.form-control {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #124ACB;
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #0e3d9e;
+}
+
+/* Signup Link */
+.signup-link a {
+    text-decoration: none;
+    font-weight: 600;
+}
+.signup-link a:hover {
+    text-decoration: underline;
+}

@@ -1,14 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Users and Documents</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <!-- Navbar -->
-<header th:insert="fragments/navbar :: navbar"></header>
+<header th:insert="fragments/admin-navbar :: navbar"></header>
 
 <!-- Main Content with Sidebar and Main Section -->
 <div class="d-flex flex-grow-1">
@@ -17,45 +19,97 @@
 
     <!-- Main Content Area -->
     <main class="flex-grow-1 p-4" style="margin-left: 300px; margin-top: 76px">
-        <div class=" mt-5">
+        <div class="mt-5">
             <!-- Title -->
             <div class="row">
-                <div class="col-12 ">
-                    <h1 class="mb-4">User and Document Management</h1>
+                <div class="col-12">
+                    <h1 class="mb-4">User Management</h1>
                 </div>
             </div>
+
+            <!-- Search and Filter -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <!-- Search Bar -->
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="userSearch"
+                            placeholder="Search users by name, email..."
+                    />
+                </div>
+                <div class="col-md-6 text-end">
+                    <!-- Filter Combo Box -->
+                    <select class="form-select w-auto d-inline-block" id="userFilter">
+                        <option value="">Filter by...</option>
+                        <option value="name">Name</option>
+                        <option value="date">Created Date</option>
+                        <option value="posts">Post Count</option>
+                        <option value="vip">VIP Status</option>
+                        <option value="active">Active Status</option>
+                    </select>
+                    <button class="btn btn-primary ms-2">Apply</button>
+                </div>
+            </div>
+
             <!-- Users Table -->
             <div class="row">
                 <div class="col-12">
-                    <h2 class="h4 mb-3">Users List</h2>
+                    <h2 class="h4 mb-3">User List</h2>
                     <table class="table table-bordered table-striped">
                         <thead class="table-dark">
                         <tr>
                             <th>#</th>
-                            <th>User Name</th>
+                            <th>Avatar</th>
+                            <th>Name</th>
                             <th>Email</th>
-                            <th>Registration Date</th>
+                            <th>Password</th>
+                            <th>isAdmin</th>
+                            <th>Last Login</th>
+                            <th>isActive</th>
+                            <th>isVIP</th>
+                            <th>Downloads</th>
+                            <th>Likes</th>
+                            <th>Followers</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>1</td>
+                            <td><img src="https://via.placeholder.com/50" alt="John Doe" class="rounded-circle"></td>
                             <td>John Doe</td>
                             <td>john@example.com</td>
-                            <td>2023-12-01</td>
+                            <td>$2y$12$abcd1234...</td>
+                            <td>Yes</td>
+                            <td>2023-12-01 10:00</td>
+                            <td>Active</td>
+                            <td>Yes</td>
+                            <td>50</td>
+                            <td>120</td>
+                            <td>75</td>
                             <td>
                                 <button class="btn btn-primary btn-sm">View</button>
+                                <button class="btn btn-warning btn-sm" onclick="openEditForm('1')">Edit</button>
                                 <button class="btn btn-danger btn-sm">Delete</button>
                             </td>
                         </tr>
                         <tr>
                             <td>2</td>
+                            <td><img src="https://via.placeholder.com/50" alt="Jane Smith" class="rounded-circle"></td>
                             <td>Jane Smith</td>
                             <td>jane@example.com</td>
-                            <td>2023-11-15</td>
+                            <td>$2y$12$efgh5678...</td>
+                            <td>No</td>
+                            <td>2023-11-30 08:30</td>
+                            <td>Inactive</td>
+                            <td>No</td>
+                            <td>30</td>
+                            <td>80</td>
+                            <td>45</td>
                             <td>
                                 <button class="btn btn-primary btn-sm">View</button>
+                                <button class="btn btn-warning btn-sm" onclick="openEditForm('2')">Edit</button>
                                 <button class="btn btn-danger btn-sm">Delete</button>
                             </td>
                         </tr>
@@ -64,50 +118,76 @@
                 </div>
             </div>
 
-            <!-- User Documents -->
+            <!-- Add and Export Buttons -->
             <div class="row mt-5">
-                <div class="col-12">
-                    <h2 class="h4 mb-3">Documents</h2>
-                    <table class="table table-bordered table-striped">
-                        <thead class="table-dark">
-                        <tr>
-                            <th>#</th>
-                            <th>Document Name</th>
-                            <th>Uploaded By</th>
-                            <th>Upload Date</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Document 1</td>
-                            <td>John Doe</td>
-                            <td>2023-12-01</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm">View</button>
-                                <button class="btn btn-danger btn-sm">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Document 2</td>
-                            <td>Jane Smith</td>
-                            <td>2023-11-15</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm">View</button>
-                                <button class="btn btn-danger btn-sm">Delete</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="col-12 text-end">
+                    <button class="btn btn-success me-3" onclick="openAddForm()">Add User</button>
+                    <button class="btn btn-secondary" id="exportExcel">Export to Excel</button>
                 </div>
             </div>
+        </div>
     </main>
 </div>
+<!--form-->
+<div class="modal fade" id="userFormModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="userForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userFormTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="userName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="userName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="userEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userPhone" class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="userPhone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userDob" class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="userDob" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function openAddForm() {
+        document.getElementById('userFormTitle').innerText = 'Add User';
+        document.getElementById('userForm').reset();
+        new bootstrap.Modal(document.getElementById('userFormModal')).show();
+    }
+
+    function openEditForm(userId) {
+        // Sample data. Replace with actual backend data.
+        const userData = {
+            '1': { name: 'John Doe', email: 'john@example.com', phone: '123-456-7890', dob: '1990-05-15' },
+            '2': { name: 'Jane Smith', email: 'jane@example.com', phone: '987-654-3210', dob: '1985-07-20' },
+        };
+
+        const user = userData[userId];
+        document.getElementById('userFormTitle').innerText = 'Edit User';
+        document.getElementById('userName').value = user.name;
+        document.getElementById('userEmail').value = user.email;
+        document.getElementById('userPhone').value = user.phone;
+        document.getElementById('userDob').value = user.dob;
+        new bootstrap.Modal(document.getElementById('userFormModal')).show();
+    }
+</script>
 <!-- Footer -->
 <footer th:insert="fragments/footer :: footer"></footer>
-
 </div>
 </body>
 </html>

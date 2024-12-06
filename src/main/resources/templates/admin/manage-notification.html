@@ -1,0 +1,170 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Website</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<!-- Navbar -->
+<header th:insert="fragments/navbar :: navbar"></header>
+
+<!-- Main Content with Sidebar and Main Section -->
+<div class="d-flex flex-grow-1">
+    <!-- Sidebar -->
+    <aside th:insert="fragments/admin-sidebar :: sidebar"></aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow-1 p-4" style="margin-left: 300px; margin-top: 76px">
+        <div class="mt-5">
+            <!-- Title -->
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="mb-4">Notifications</h1>
+                </div>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="row mb-3">
+                <!-- Search -->
+                <div class="col-md-6">
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="searchNotifications"
+                            placeholder="Search notifications, sender, etc..."
+                            onkeyup="searchNotifications()"
+                    />
+                </div>
+                <!-- Filter by Time -->
+                <div class="col-md-6">
+                    <div class="d-flex gap-2">
+                        <input type="date" class="form-control" id="filterStartDate" placeholder="Start Date">
+                        <input type="date" class="form-control" id="filterEndDate" placeholder="End Date">
+                        <button class="btn btn-primary" onclick="filterNotifications()">Filter</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications Table -->
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h4 mb-3">Notification List</h2>
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Notification ID</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Sender</th>
+                            <th>Sent At</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>NOTIF001</td>
+                            <td>Welcome!</td>
+                            <td>Welcome to our platform. We’re glad to have you!</td>
+                            <td>Admin</td>
+                            <td>2023-12-01 10:00</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">View</button>
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>NOTIF002</td>
+                            <td>Reminder</td>
+                            <td>Your subscription will expire in 3 days. Renew now!</td>
+                            <td>Admin</td>
+                            <td>2023-11-30 08:30</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm">View</button>
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Add and Export Buttons -->
+            <div class="row mt-5">
+                <div class="col-12 text-end">
+                    <button class="btn btn-success me-3" onclick="openNotificationForm()">Add Notification</button>
+                    <button class="btn btn-secondary" id="exportExcel">Export Excel</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Notification Form -->
+<div class="modal fade" id="notificationFormModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="notificationForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationFormTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="notificationTitle" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="notificationTitle" placeholder="Enter notification title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="notificationContent" class="form-label">Content</label>
+                        <textarea class="form-control" id="notificationContent" rows="4" placeholder="Enter notification content" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Send Notification</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openNotificationForm() {
+        document.getElementById('notificationFormTitle').innerText = 'Create Notification';
+        document.getElementById('notificationForm').reset();
+        new bootstrap.Modal(document.getElementById('notificationFormModal')).show();
+    }
+
+    document.getElementById('notificationForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const title = document.getElementById('notificationTitle').value;
+        const content = document.getElementById('notificationContent').value;
+
+        const notificationData = {
+            title: title,
+            content: content,
+            sentAt: new Date().toISOString(),
+            sender: 'Admin',
+        };
+
+        console.log('Notification Data:', notificationData);
+
+        const modalInstance = bootstrap.Modal.getInstance(document.getElementById('notificationFormModal'));
+        modalInstance.hide();
+
+        alert('Notification sent successfully!');
+    });
+</script>
+
+<!-- Footer -->
+<footer th:insert="fragments/footer :: footer"></footer>
+
+</body>
+</html>
