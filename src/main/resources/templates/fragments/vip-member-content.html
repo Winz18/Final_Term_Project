@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+<link rel="stylesheet" href="/css/vip-member.css">
+<div class="subscription-container">
+    <h3>Subscription</h3>
+
+    <!-- Nếu là VIP Member -->
+    <div class="current-status">
+        <h4>Your VIP Status</h4>
+        <p>Plan: <strong>1-Year VIP Membership</strong></p>
+        <p>Start Date: <strong>2024-01-01</strong></p>
+        <p>Expiration Date: <strong>2025-01-01</strong></p>
+        <div class="earnings-summary">
+            <p>This Month's Earnings: <strong>$120.00</strong></p>
+        </div>
+    </div>
+
+    <!-- Nếu chưa là VIP Member -->
+    <div class="vip-plans">
+        <h4>Become a VIP Member</h4>
+        <p>Enjoy the following benefits:</p>
+        <ul class="vip-benefits">
+            <li>Unlimited access to all documents.</li>
+            <li>Earn royalties from your uploaded documents.</li>
+            <li>Exclusive storage space for VIP Members.</li>
+            <li>Priority support and enhanced features.</li>
+        </ul>
+
+        <div class="plan-card">
+            <h4>1-Month Plan</h4>
+            <p>Perfect for short-term access</p>
+            <p class="price">$10.00</p>
+            <button onclick="subscribe('1-month')">Subscribe</button>
+        </div>
+
+        <div class="plan-card">
+            <h4>1-Year Plan</h4>
+            <p>Save 20% with an annual plan</p>
+            <p class="price">$96.00 (20% Off)</p>
+            <button onclick="subscribe('1-year')">Subscribe</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function subscribe(plan) {
+        alert(`You have selected the ${plan} plan. Redirecting to payment...`);
+        // Chuyển hướng đến trang thanh toán
+        window.location.href = `/payment?plan=${plan}`;
+    }
+</script>
+</html>

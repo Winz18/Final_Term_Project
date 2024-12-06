@@ -1,11 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="content">
-<link rel="stylesheet" href="/css/my-documents-content.css">
-<div class="container mt-4">
-    <!-- Thanh tìm kiếm -->
+<link rel="stylesheet" href="/css/recent-recommend.css">
+<div class="recent-documents-container">
+    <!-- Thanh tìm kiếm và bộ lọc -->
     <div class="search-and-filter">
         <div class="search-bar">
             <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search for recent documents...">
+            <input type="text" placeholder="Search for documents...">
         </div>
         <div class="filter-options">
             <select>
@@ -20,65 +20,41 @@
             </select>
         </div>
     </div>
-    <div class="documents-container">
-        <!-- Dữ liệu giả, thay thế bằng vòng lặp từ backend -->
+
+    <!-- Danh sách tài liệu -->
+    <div class="documents-grid">
+        <!-- Dữ liệu giả -->
         <div class="document-card">
             <img src="/images/sample1.jpg" alt="Document Thumbnail">
-            <h5>Document Title 1</h5>
+            <h5>Sample Document 1</h5>
             <p class="card-text">
                 Author: John Doe<br>
                 Views: 120<br>
                 Uploaded: 2024-01-01
             </p>
-            <div class="btn-group">
-                <button class="btn btn-primary">Edit</button>
-                <button class="btn btn-danger">Delete</button>
-            </div>
+            <button>View</button>
         </div>
-
         <div class="document-card">
             <img src="/images/sample2.jpg" alt="Document Thumbnail">
-            <h5>Document Title 2</h5>
+            <h5>Sample Document 2</h5>
             <p class="card-text">
                 Author: John Doe<br>
                 Views: 120<br>
                 Uploaded: 2024-01-01
             </p>
-            <div class="btn-group">
-                <button class="btn btn-primary">Edit</button>
-                <button class="btn btn-danger">Delete</button>
-            </div>
+            <button>View</button>
         </div>
-
         <div class="document-card">
             <img src="/images/sample3.jpg" alt="Document Thumbnail">
-            <h5>Document Title 3</h5>
+            <h5>Sample Document 3</h5>
+            <p>Author: abc</p>
             <p class="card-text">
                 Author: John Doe<br>
                 Views: 120<br>
                 Uploaded: 2024-01-01
             </p>
-            <div class="btn-group">
-                <button class="btn btn-primary">Edit</button>
-                <button class="btn btn-danger">Delete</button>
-            </div>
+            <button>View</button>
         </div>
-
-        <div class="document-card">
-            <img src="/images/sample3.jpg" alt="Document Thumbnail">
-            <h5>Document Title 3</h5>
-            <p class="card-text">
-                Author: John Doe<br>
-                Views: 120<br>
-                Uploaded: 2024-01-01
-            </p>
-            <div class="btn-group">
-                <button class="btn btn-primary">Edit</button>
-                <button class="btn btn-danger">Delete</button>
-            </div>
-        </div>
-
-        <!-- Thêm các ô khác -->
     </div>
 
     <!-- Phân trang -->
@@ -86,8 +62,5 @@
         <li><a href="?page=1">1</a></li>
         <li><a href="?page=2">2</a></li>
         <li><a href="?page=3">3</a></li>
-        <!-- ... -->
     </ul>
 </div>
-
-

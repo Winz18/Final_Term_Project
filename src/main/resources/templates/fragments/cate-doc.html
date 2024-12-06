@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+<link rel="stylesheet" href="/css/cate-doc.css">
+<div class="hashtag-search-container">
+  <!-- Tiêu đề -->
+  <h3>Search by Hashtag</h3>
+
+  <!-- Thanh tìm kiếm -->
+  <div class="search-bar">
+    <i class="fas fa-search"></i>
+    <input type="text" id="hashtag-search-input" placeholder="Enter a hashtag..." onkeypress="searchByHashtag(event)">
+  </div>
+
+  <!-- Hashtag phổ biến -->
+  <div class="popular-hashtags">
+    <div class="hashtag" onclick="searchByPopularHashtag('#Science')">#Science</div>
+    <div class="hashtag" onclick="searchByPopularHashtag('#Math')">#Math</div>
+    <div class="hashtag" onclick="searchByPopularHashtag('#Technology')">#Technology</div>
+    <div class="hashtag" onclick="searchByPopularHashtag('#Literature')">#Literature</div>
+    <div class="hashtag" onclick="searchByPopularHashtag('#Physics')">#Physics</div>
+  </div>
+
+  <!-- Danh sách tài liệu -->
+  <div class="documents-grid" id="documents-grid">
+    <!-- Kết quả tìm kiếm sẽ hiển thị ở đây -->
+  </div>
+</div>
+
+<script src="/js/cate-doc.js"></script>
+</html>

@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+<link rel="stylesheet" href="/css/uni-doc.css">
+<div class="university-documents-container">
+  <!-- Tiêu đề -->
+  <h3>Documents from <span id="university-name">University Name</span></h3>
+
+  <!-- Danh sách tài liệu -->
+  <div class="documents-grid">
+    <!-- Dữ liệu mẫu -->
+    <div class="document-card">
+      <img src="/images/sample1.jpg" alt="Document Thumbnail">
+      <h5>Document Title 1</h5>
+      <p>Uploaded by John Doe</p>
+      <button onclick="viewDocument(1)">View Document</button>
+    </div>
+    <div class="document-card">
+      <img src="/images/sample2.jpg" alt="Document Thumbnail">
+      <h5>Document Title 2</h5>
+      <p>Uploaded by Jane Smith</p>
+      <button onclick="viewDocument(2)">View Document</button>
+    </div>
+    <div class="document-card">
+      <img src="/images/sample3.jpg" alt="Document Thumbnail">
+      <h5>Document Title 3</h5>
+      <p>Uploaded by Michael Brown</p>
+      <button onclick="viewDocument(3)">View Document</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/uni-doc.js"></script>
+</html>
