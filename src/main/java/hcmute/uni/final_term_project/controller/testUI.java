@@ -4,14 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-public class test {
+public class testUI {
     @Controller
     public static class MainController {
 
         @GetMapping("/test_UI")
         public String home(Model model) {
             model.addAttribute("userName", "Nguyen Thang Loi");  // Truyền dữ liệu cho giao diện
-            return "user/edit-doc";  // Trả về giao diện
+            return "user/payment";  // Trả về giao diện
         }
     }
 
