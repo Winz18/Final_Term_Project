@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="sidebar">
+<link rel="stylesheet" href="/css/sidebar.css">
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+</head>
+<div class="d-flex flex-column p-3 sidebar">
+    <h5 th:text="${userName}" class="username">Nguyen Thang Loi</h5>
+    <p class="username">0 Followers | 0 Uploads</p>
+    <button type="button" class="btn btn-primary mb-3 w-100">+ Upload</button>
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fas fa-chart-pie" ></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fas fa-book"></i> My Docs</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fas fa-cog"></i> Setting</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fas fa-users"></i> Users</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fas fa-file" ></i> Documents</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fas fa-money-bill"></i> Commissions</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fas fa-percent"></i> Discounts</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link"><i class="fas fa-bell"></i> Notification</a>
+        </li>
+    </ul>
+</div>
+</html>

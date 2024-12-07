@@ -1,0 +1,124 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Document Website</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+<!-- Navbar -->
+<header th:insert="fragments/admin-navbar :: navbar"></header>
+
+<!-- Main Content with Sidebar and Main Section -->
+<div class="d-flex flex-grow-1">
+    <!-- Sidebar -->
+    <aside th:insert="fragments/admin-sidebar :: sidebar"></aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow-1 p-4" style="margin-left: 300px; margin-top: 76px">
+        <div class="d-flex" id="wrapper">
+            <div class="container-fluid mt-4">
+                <h2>Welcome, Admin</h2>
+                <h2 class="text-center fw-bold mb-5" style="font-size: 3rem; color: #124ACB;">Statistics</h2>
+
+                <!-- Section: Users -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h3 class="mb-3">Users</h3>
+                    </div>
+                    <!-- Total Users -->
+                    <div class="col-md-4">
+                        <div class="card text-white bg-primary mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Users</h5>
+                                <p class="card-text">100 registered users</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- VIP Users -->
+                    <div class="col-md-4">
+                        <div class="card text-white bg-warning mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">VIP Users</h5>
+                                <p class="card-text">10 VIP users</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Online Users -->
+                    <div class="col-md-4">
+                        <div class="card text-white bg-secondary mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Currently Online</h5>
+                                <p class="card-text">25 users online</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Documents -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h3 class="mb-3">Documents</h3>
+                    </div>
+                    <!-- Total Documents -->
+                    <div class="col-md-6">
+                        <div class="card text-white bg-success mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Documents</h5>
+                                <p class="card-text">200 documents</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Documents Uploaded Today -->
+                    <div class="col-md-6">
+                        <div class="card text-white bg-danger mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Today's Uploads</h5>
+                                <p class="card-text">10 documents uploaded today</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section: Revenue -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h3 class="mb-3">Revenue</h3>
+                    </div>
+                    <!-- Daily Revenue -->
+                    <div class="col-md-4">
+                        <div class="card text-white bg-info mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Daily Revenue</h5>
+                                <p class="card-text">₫500,000 Today</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Monthly Revenue -->
+                    <div class="col-md-4">
+                        <div class="card text-white bg-info mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Monthly Revenue</h5>
+                                <p class="card-text">₫15,000,000 This Month</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Yearly Revenue -->
+                    <div class="col-md-4">
+                        <div class="card text-white bg-info mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Yearly Revenue</h5>
+                                <p class="card-text">₫180,000,000 This Year</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<!-- Footer -->
+<footer th:insert="fragments/footer :: footer"></footer>
+
+</body>
+</html>

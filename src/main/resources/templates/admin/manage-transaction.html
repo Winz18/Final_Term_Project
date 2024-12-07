@@ -1,0 +1,139 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Document Website</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+<!-- Navbar -->
+<header th:insert="fragments/admin-navbar :: navbar"></header>
+
+<!-- Main Content with Sidebar and Main Section -->
+<div class="d-flex flex-grow-1">
+    <!-- Sidebar -->
+    <aside th:insert="fragments/admin-sidebar :: sidebar"></aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow-1 p-4" style="margin-left: 300px; margin-top: 76px">
+        <div class="container-fluid mt-4">
+            <h2 class="fw-bold mb-5" style="font-size: 3rem;">Subscription Management</h2>
+
+            <!-- Search and Filter -->
+            <div class="row mb-4">
+                <!-- Search -->
+                <div class="col-md-6">
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="searchInput"
+                            placeholder="Search by User ID, Sub ID, or Promo ID..."
+                            onkeyup="searchSubscriptions()"
+                    />
+                </div>
+                <!-- Filter -->
+                <div class="col-md-6">
+                    <div class="d-flex gap-2">
+                        <select class="form-select w-auto" id="filterType" onchange="filterSubscriptions()">
+                            <option value="">Filter by Type</option>
+                            <option value="Annual">Annual</option>
+                            <option value="Half-Year">Half-Year</option>
+                            <option value="Monthly">Monthly</option>
+                        </select>
+                        <select class="form-select w-auto" id="filterPromo" onchange="filterSubscriptions()">
+                            <option value="">Filter by Promo Usage</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                        <input
+                                type="date"
+                                class="form-control w-auto"
+                                id="filterStartDate"
+                                placeholder="Start Date"
+                        />
+                        <input
+                                type="date"
+                                class="form-control w-auto"
+                                id="filterEndDate"
+                                placeholder="End Date"
+                                onchange="filterSubscriptions()"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subscriptions Table -->
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered table-striped" id="subscriptionsTable">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Sub ID</th>
+                            <th>User ID</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Type</th>
+                            <th>Value (VND)</th>
+                            <th>Use Promo</th>
+                            <th>Promo ID</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>SUB001</td>
+                            <td>USR001</td>
+                            <td>2023-12-01</td>
+                            <td>2024-12-01</td>
+                            <td>Annual</td>
+                            <td>₫1,200,000</td>
+                            <td>Yes</td>
+                            <td>PROMO123</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>SUB002</td>
+                            <td>USR002</td>
+                            <td>2023-06-01</td>
+                            <td>2023-12-01</td>
+                            <td>Half-Year</td>
+                            <td>₫600,000</td>
+                            <td>No</td>
+                            <td>-</td>
+                        </tr>
+                        <!-- Add data here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h2 class="h4 mb-3">Statistics</h2>
+                    <table class="table table-bordered">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>Total Subscribers</th>
+                            <th>Total Revenue (VND)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td id="totalSubscribers">0</td>
+                            <td id="totalRevenue">₫0</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+<!-- Footer -->
+<footer th:insert="fragments/footer :: footer"></footer>
+
+</body>
+</html>
