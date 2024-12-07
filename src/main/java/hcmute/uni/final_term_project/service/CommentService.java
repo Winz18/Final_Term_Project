@@ -47,7 +47,7 @@ public class CommentService {
         if (document == null || document.getDocId() == null) {
             throw new IllegalArgumentException("Document cannot be null or without an ID.");
         }
-        return commentRepository.countByDoc(document);
+        return commentRepository.countByDocument(document);
     }
 
     // Thêm bình luận mới

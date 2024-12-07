@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
     List<Comment> findByDocument(Document document);
-    long countByDoc(Document document); // Đếm số bình luận của một tài liệu
+    long countByDocument(Document document);
 
 }
