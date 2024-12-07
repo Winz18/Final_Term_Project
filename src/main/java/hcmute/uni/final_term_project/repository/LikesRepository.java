@@ -13,7 +13,7 @@ public interface LikesRepository extends JpaRepository<Likes, Long> {
     List<Likes> findByUser(User user);
     List<Likes> findByDocument(Document document);
 
-    long countByDoc(Document document); // Số lượng like của một tài liệu
-    boolean existsByUserAndDoc(User user, Document document); // Kiểm tra xem user đã like tài liệu chưa
+    long countByDocument(Document document); // Số lượng like của một tài liệu
+    boolean existsByUserAndDocument(User user, Document document); // Kiểm tra xem user đã like tài liệu chưa
 
 }

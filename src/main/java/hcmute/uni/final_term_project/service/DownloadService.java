@@ -55,7 +55,7 @@ public class DownloadService {
         if (document == null || document.getDocId() == null) {
             throw new IllegalArgumentException("Document cannot be null or without an ID.");
         }
-        return downloadRepository.countByDoc(document);
+        return downloadRepository.countByDocument(document);
     }
 
     // Đếm số lượt tải của một user

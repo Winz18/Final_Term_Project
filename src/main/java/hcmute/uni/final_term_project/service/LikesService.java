@@ -55,7 +55,7 @@ public class LikesService {
         if (document == null || document.getDocId() == null) {
             throw new IllegalArgumentException("Document cannot be null or without an ID.");
         }
-        return likesRepository.countByDoc(document);
+        return likesRepository.countByDocument(document);
     }
 
     // Kiểm tra xem một user đã like tài liệu chưa
@@ -66,7 +66,7 @@ public class LikesService {
         if (document == null || document.getDocId() == null) {
             throw new IllegalArgumentException("Document cannot be null or without an ID.");
         }
-        return likesRepository.existsByUserAndDoc(user, document);
+        return likesRepository.existsByUserAndDocument(user, document);
     }
 
     // Thêm một lượt like

@@ -58,9 +58,12 @@ public class DocumentService {
         return documentRepository.findByCateTagsContaining(tag);
     }
 
-    // Tìm tài liệu theo trạng thái VIP
     public List<Document> getVIPDocuments() {
-        return documentRepository.findByIsVIP();
+        return documentRepository.findByIsVIP(true); // Lấy danh sách tài liệu VIP
+    }
+
+    public List<Document> getNonVIPDocuments() {
+        return documentRepository.findByIsVIP(false); // Lấy danh sách tài liệu không phải VIP
     }
 
     // Tạo hoặc cập nhật tài liệu
