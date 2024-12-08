@@ -3,43 +3,48 @@
 <div class="upload-container">
     <h3>Upload Document</h3>
 
-    <form id="uploadForm" onsubmit="uploadDocument(event)">
+    <form id="uploadForm" action="/user/upload-document" method="post" enctype="multipart/form-data">
         <!-- Tải lên tài liệu -->
         <label for="document-file">Select Document (PDF/DOCX only)</label>
-        <input type="file" id="document-file" accept=".pdf, .docx" required>
+        <input type="file" id="document-file" name="file" accept=".pdf, .docx" required>
 
         <!-- Ảnh đại diện -->
         <label for="thumbnail">Upload Thumbnail</label>
-        <input type="file" id="thumbnail" accept="image/*" required>
+        <input type="file" id="thumbnail" name="thumbnail" accept="image/*" required>
 
         <!-- Tên tài liệu -->
         <label for="document-title">Document Title</label>
-        <input type="text" id="document-title" placeholder="Enter document title" required>
+        <input type="text" id="document-title" name="title" placeholder="Enter document title" required>
 
         <!-- Tác giả -->
         <label for="author-name">Author Name</label>
-        <input type="text" id="author-name" placeholder="Enter author name" required>
+        <input type="text" id="author-name" name="authorName" placeholder="Enter author name" required
+               th:value="${currentUserName}">
 
         <!-- Bật chế độ kiếm tiền -->
         <div class="vip-only">
-            <input type="checkbox" id="earnings-mode" disabled>
+            <input type="checkbox" id="earnings-mode" name="earningsMode" th:disabled="${!isVIP}">
             <label for="earnings-mode">Enable Earnings Mode (VIP Members Only)</label>
         </div>
-        <p class="vip-warning" id="vip-warning" style="display: none;">You must be a VIP Member to enable this option.</p>
+        <p class="vip-warning" id="vip-warning" style="display: none;">You must be a VIP Member to enable this
+            option.</p>
 
         <!-- Thể loại (Hashtag) -->
         <label for="tags-input">Categories (Hashtags)</label>
         <div class="tags-input" id="tags-input">
-            <input type="text" id="tag-input" placeholder="Add a tag" onkeypress="addTag(event)">
+            <input type="text" id="tag-input" name="tags" placeholder="Add a tag" onkeypress="addTag(event)">
         </div>
 
         <!-- Trường đại học -->
         <label for="university">University/Institute</label>
-        <input type="text" id="university" placeholder="Enter university/institute name">
+        <input type="text" id="university" name="university" placeholder="Enter university/institute name">
 
         <!-- Nút upload -->
         <button type="submit">Upload Document</button>
     </form>
+    <div th:if="${error}" class="alert alert-danger">
+        <span th:text="${error}"></span>
+    </div>
 </div>
 <script src="/js/upload.js"></script>
 </html>

@@ -17,14 +17,14 @@
     </div>
     <div class="documents-grid">
         <div class="document-card doc" th:each="doc : ${recentDocuments}">
-            <img th:src="${doc.background}" alt="Document Thumbnail">
+            <img th:src="'/uploads/' +${doc.background}" alt="Document Thumbnail">
             <h5 th:text="${doc.name}"></h5>
             <p class="card-text">
                 Author: <span th:text="${doc.owner.name}"></span><br>
                 Views: <span th:text="${doc.views}"></span><br>
                 Uploaded: <span th:text="${doc.dateUploaded}"></span>
             </p>
-            <button th:href="@{/view-detail/{id}(id=${doc.docId})}">View</button>
+            <a th:href="@{/user/view-detail/{id}(id=${doc.docId})}" class="btn btn-primary">View</a>
         </div>
     </div>
 

@@ -1,6 +1,7 @@
 package hcmute.uni.final_term_project.service;
 
 import hcmute.uni.final_term_project.entity.Document;
+import hcmute.uni.final_term_project.entity.User;
 import hcmute.uni.final_term_project.repository.DocumentRepository;
 import hcmute.uni.final_term_project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,14 @@ public class DocumentService {
             throw new IllegalArgumentException("Document ID must be a positive number.");
         }
         return documentRepository.findById(id);
+    }
+
+    // Lấy tài liệu theo owner
+    public List<Document> getDocumentsByOwner(User owner) {
+        if (owner == null || userRepository.findById(owner.getUserId()).isEmpty()) {
+            throw new IllegalArgumentException("Owner must be a valid and existing user.");
+        }
+        return documentRepository.findByOwner(owner);
     }
 
     // Tìm tài liệu theo tên
@@ -121,9 +130,6 @@ public class DocumentService {
         }
         if (document.getUniversity() == null || document.getUniversity().isBlank()) {
             throw new IllegalArgumentException("University cannot be null or empty.");
-        }
-        if (document.getFileType() == null || !(document.getFileType().equalsIgnoreCase("pdf") || document.getFileType().equalsIgnoreCase("docx"))) {
-            throw new IllegalArgumentException("File type must be either 'pdf' or 'docx'.");
         }
         if (document.getOwner() == null || userRepository.findById(document.getOwner().getUserId()).isEmpty()) {
             throw new IllegalArgumentException("Document owner must be a valid and existing user.");

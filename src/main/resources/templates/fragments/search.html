@@ -26,7 +26,7 @@
                 Views: <span th:text="${doc.views}"></span><br>
                 Uploaded: <span th:text="${doc.dateUploaded}"></span>
             </p>
-            <a th:href="@{/view-detail/{id}(id=${doc.docId})}" class="btn btn-primary">View</a>
+            <a th:href="@{/user/view-detail/{id}(id=${doc.docId})}" class="btn btn-primary">View</a>
         </div>
     </div>
 </div>

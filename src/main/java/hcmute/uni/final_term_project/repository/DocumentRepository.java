@@ -18,4 +18,5 @@ public interface DocumentRepository extends JpaRepository<Document, Long> {
     List<Document> findByOrderByViewsDesc(); // Tài liệu nhiều lượt xem nhất
     List<Document> findTop3ByOrderByDownloadsDesc(); // Tài liệu được tải xuống nhiều nhất
     List<Document> findTop3ByOrderByViewsDesc();
+
 }

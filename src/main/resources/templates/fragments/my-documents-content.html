@@ -2,83 +2,33 @@
 <link rel="stylesheet" href="/css/my-documents-content.css">
 <div class="container mt-4">
     <!-- Thanh tìm kiếm -->
-    <div class="search-and-filter">
-        <div class="search-bar">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search for recent documents...">
-        </div>
-        <div class="filter-options">
-            <select>
-                <option value="">Filter by Name</option>
-                <option value="a-z">A-Z</option>
-                <option value="z-a">Z-A</option>
-            </select>
-            <select>
-                <option value="">Filter by Time</option>
-                <option value="newest">Newest</option>
-                <option value="oldest">Oldest</option>
-            </select>
+    <div class="row mb-4">
+        <div class="col-12">
+            <form action="/user/search" method="get">
+                <div class="input-group w-75">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="search-icon"><i class="fas fa-search"></i></span>
+                    </div>
+                    <input type="text" name="query" class="form-control w-75" placeholder="Search for documents..."
+                           style="font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                </div>
+            </form>
         </div>
     </div>
     <div class="documents-container">
-        <!-- Dữ liệu giả, thay thế bằng vòng lặp từ backend -->
-        <div class="document-card">
-            <img src="/images/sample1.jpg" alt="Document Thumbnail">
-            <h5>Document Title 1</h5>
+        <div th:each="document : ${myDocuments}" class="document-card">
+            <img th:src="'/uploads/' +${document.background}" alt="Document Thumbnail">
+            <h5 th:text="${document.name}">Document Title</h5>
             <p class="card-text">
-                Author: John Doe<br>
-                Views: 120<br>
-                Uploaded: 2024-01-01
+                Author: <span th:text="${document.owner.name}">Author Name</span><br>
+                Views: <span th:text="${document.views}">0</span><br>
+                Uploaded: <span th:text="${document.dateUploaded}">2024-01-01</span>
             </p>
             <div class="btn-group">
-                <button class="btn btn-primary">Edit</button>
+                <a th:href="@{/user/view-detail/{id}(id=${document.docId})}" class="btn btn-primary">View</a>
                 <button class="btn btn-danger">Delete</button>
             </div>
         </div>
-
-        <div class="document-card">
-            <img src="/images/sample2.jpg" alt="Document Thumbnail">
-            <h5>Document Title 2</h5>
-            <p class="card-text">
-                Author: John Doe<br>
-                Views: 120<br>
-                Uploaded: 2024-01-01
-            </p>
-            <div class="btn-group">
-                <button class="btn btn-primary">Edit</button>
-                <button class="btn btn-danger">Delete</button>
-            </div>
-        </div>
-
-        <div class="document-card">
-            <img src="/images/sample3.jpg" alt="Document Thumbnail">
-            <h5>Document Title 3</h5>
-            <p class="card-text">
-                Author: John Doe<br>
-                Views: 120<br>
-                Uploaded: 2024-01-01
-            </p>
-            <div class="btn-group">
-                <button class="btn btn-primary">Edit</button>
-                <button class="btn btn-danger">Delete</button>
-            </div>
-        </div>
-
-        <div class="document-card">
-            <img src="/images/sample3.jpg" alt="Document Thumbnail">
-            <h5>Document Title 3</h5>
-            <p class="card-text">
-                Author: John Doe<br>
-                Views: 120<br>
-                Uploaded: 2024-01-01
-            </p>
-            <div class="btn-group">
-                <button class="btn btn-primary">Edit</button>
-                <button class="btn btn-danger">Delete</button>
-            </div>
-        </div>
-
-        <!-- Thêm các ô khác -->
     </div>
 
     <!-- Phân trang -->
@@ -86,7 +36,6 @@
         <li><a href="?page=1">1</a></li>
         <li><a href="?page=2">2</a></li>
         <li><a href="?page=3">3</a></li>
-        <!-- ... -->
     </ul>
 </div>
 

@@ -51,7 +51,8 @@ public class UserNavigationController {
         model.addAttribute("commission", userService.getCommissionThisMonth());
         model.addAttribute("followers", userService.getCurrentUser().getFollowers());
         model.addAttribute("newFollowers", userService.countNewFollowersThisMonth());
-        model.addAttribute("documentsUploaded", userService.countDocumentUploadedThisMonth());
+        model.addAttribute("documentsUploaded", documentService.getDocumentsByOwner(userService.getCurrentUser()).size());
+        model.addAttribute("documentsUploadedThisMonth", userService.countDocumentUploadedThisMonth());
 
         return "user/user-home";
     }
@@ -66,7 +67,7 @@ public class UserNavigationController {
         model.addAttribute("isVIP", userService.getCurrentUser().isVIP());
         model.addAttribute("avatar", userService.getCurrentUser().getAvatar());
         model.addAttribute("followers", userService.getCurrentUser().getFollowers());
-        model.addAttribute("documentsUploaded", userService.countDocumentUploadedThisMonth());
+        model.addAttribute("documentsUploaded", documentService.getDocumentsByOwner(userService.getCurrentUser()).size());
 
         return "user/search";
     }
@@ -84,7 +85,7 @@ public class UserNavigationController {
         model.addAttribute("isVIP", userService.getCurrentUser().isVIP());
         model.addAttribute("avatar", userService.getCurrentUser().getAvatar());
         model.addAttribute("followers", userService.getCurrentUser().getFollowers());
-        model.addAttribute("documentsUploaded", userService.countDocumentUploadedThisMonth());
+        model.addAttribute("documentsUploaded", documentService.getDocumentsByOwner(userService.getCurrentUser()).size());
 
         return "user/recent-documents";
     }
@@ -101,7 +102,7 @@ public class UserNavigationController {
         model.addAttribute("isVIP", userService.getCurrentUser().isVIP());
         model.addAttribute("avatar", userService.getCurrentUser().getAvatar());
         model.addAttribute("followers", userService.getCurrentUser().getFollowers());
-        model.addAttribute("documentsUploaded", userService.countDocumentUploadedThisMonth());
+        model.addAttribute("documentsUploaded", documentService.getDocumentsByOwner(userService.getCurrentUser()).size());
 
         return "user/recommend-documents";
     }

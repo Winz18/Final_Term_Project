@@ -25,7 +25,7 @@
         <div class="d-flex flex-wrap">
             <!-- Thymeleaf loop for recent documents -->
             <div class="card mr-3 mb-3" style="width: 18rem;" th:each="doc : ${recentDocuments}">
-                <img th:src="${doc.background}" class="card-img-top" alt="Document Thumbnail">
+                <img th:src="'/uploads/' +${doc.background}" alt="Document Thumbnail">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${doc.name}"></h5>
                     <p class="card-text">
@@ -33,7 +33,7 @@
                         Views: <span th:text="${doc.views}"></span><br>
                         Uploaded: <span th:text="${doc.dateUploaded}"></span>
                     </p>
-                    <a th:href="@{/view-detail/{id}(id=${doc.docId})}" class="btn btn-primary">View</a>
+                    <a th:href="@{/user/view-detail/{id}(id=${doc.docId})}" class="btn btn-primary">View</a>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
         <div class="d-flex flex-wrap">
             <!-- Thymeleaf loop for recommended documents -->
             <div class="card mr-3 mb-3" style="width: 18rem;" th:each="doc : ${recommendedDocuments}">
-                <img th:src="${doc.background}" class="card-img-top" alt="Document Thumbnail">
+                <img th:src="'/uploads/' +${doc.background}" alt="Document Thumbnail">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${doc.name}"></h5>
                     <p class="card-text">
@@ -56,7 +56,7 @@
                         Views: <span th:text="${doc.views}"></span><br>
                         Uploaded: <span th:text="${doc.dateUploaded}"></span>
                     </p>
-                    <a th:href="@{/view-detail/{id}(id=${doc.docId})}" class="btn btn-primary">View</a>
+                    <a th:href="@{/user/view-detail/{id}(id=${doc.docId})}" class="btn btn-primary">View</a>
                 </div>
             </div>
         </div>
@@ -66,20 +66,20 @@
     <div class="row mt-4">
         <div class="col-md-4">
             <div class="card p-3">
-                <h5>You've uploaded this month:</h5>
-                <p th:text="${documentsUploaded}"></p>
+                <h6>You've uploaded this month:</h6>
+                <p th:text="${documentsUploadedThisMonth} + ' documents'"></p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card p-3">
-                <h5>You've earned this month:</h5>
-                <p th:text="${commission}">USD</p>
+                <h6>You've earned this month:</h6>
+                <p th:text="${commission} + ' $'"></p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card p-3">
-                <h5>Followers increased this month:</h5>
-                <p th:text="${newFollowers}">people</p>
+                <h6>Followers increased this month:</h6>
+                <p th:text="${newFollowers} + ' people'"></p>
             </div>
         </div>
     </div>

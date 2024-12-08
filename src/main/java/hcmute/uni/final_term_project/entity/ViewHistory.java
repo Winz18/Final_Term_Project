@@ -30,4 +30,10 @@ public class ViewHistory {
 
         @Column(name = "viewed_at")
         private LocalDateTime viewedAt;
+
+        public ViewHistory(User currentUser, Document doc) {
+                this.user = currentUser;
+                this.document = doc;
+                this.viewedAt = LocalDateTime.now();
+        }
 }

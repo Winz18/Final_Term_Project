@@ -21,10 +21,12 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserProfileController {
     private final UserService userService;
+    private final DocumentService documentService;
 
     @Autowired
-    public UserProfileController(UserService userService) {
+    public UserProfileController(UserService userService , DocumentService documentService) {
         this.userService = userService;
+        this.documentService = documentService;
     }
 
     @GetMapping("/profile")
@@ -36,7 +38,7 @@ public class UserProfileController {
         model.addAttribute("followers", userService.getCurrentUser().getFollowers());
         model.addAttribute("bio", userService.getCurrentUser().getBio());
         model.addAttribute("email", userService.getCurrentUser().getEmail());
-        model.addAttribute("documentsUploaded", userService.countDocumentUploadedThisMonth());
+        model.addAttribute("documentsUploaded", documentService.getDocumentsByOwner(userService.getCurrentUser()).size());
 
         return "user/my-profile";
     }
