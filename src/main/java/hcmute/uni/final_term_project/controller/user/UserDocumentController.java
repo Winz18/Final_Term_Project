@@ -2,8 +2,6 @@ package hcmute.uni.final_term_project.controller.user;
 
 import hcmute.uni.final_term_project.entity.Comment;
 import hcmute.uni.final_term_project.entity.Document;
-import hcmute.uni.final_term_project.entity.Download;
-import hcmute.uni.final_term_project.entity.Likes;
 import hcmute.uni.final_term_project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -407,5 +405,20 @@ public class UserDocumentController {
         } catch (Exception e) {
             throw new IllegalArgumentException("Error occurred while downloading the document.", e);
         }
+    }
+
+    // endpoint for comment on a document
+    @PostMapping("/comment-document/{id}")
+    public String commentDocument(@PathVariable("id") Long documentId,
+                                  @RequestParam("content") String content) {
+        // Lấy tài liệu theo ID
+        Optional<Document> document = documentService.getDocumentById(documentId);
+        Document doc = document.orElseThrow(() -> new IllegalArgumentException("Document not found"));
+
+        // Lưu bình luận vào cơ sở dữ liệu
+        commentService.addComment(userService.getCurrentUser(), doc, content);
+
+        // Chuyển hướng về trang chi tiết tài liệu
+        return "redirect:/user/view-detail/" + documentId;
     }
 }

@@ -106,6 +106,4 @@ public class UserNavigationController {
 
         return "user/recommend-documents";
     }
-
-
 }

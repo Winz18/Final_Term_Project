@@ -37,13 +37,14 @@
     <!-- Phần bình luận -->
     <div class="comments-section">
         <h4>Comments</h4>
-        <div class="comment-box">
-            <textarea placeholder="Write your comment..." rows="3"></textarea>
-            <button onclick="postComment()">Post Comment</button>
-        </div>
+        <form class="comment-box" th:action="@{/user/comment-document/{id}(id=${document.docId})}" method="post">
+            <textarea name="content" placeholder="Write your comment..." rows="3"></textarea>
+            <button type="submit">Submit</button>
+        </form>
         <ul class="comment-list">
             <li th:each="comment : ${comments}">
-                <p class="author" th:text="${comment.user.name}">Jane Doe</p>
+                <i class="author" th:text="${comment.user.name}">Jane Doe</i>
+                <p class="date" th:text="${comment.date}">2024-01-01</p>
                 <p th:text="${comment.content}">This is an amazing document. Thanks for sharing!</p>
             </li>
         </ul>
