@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+<link rel="stylesheet" href="/css/home-content.css">
+<!-- Thanh tìm kiếm -->
+<div class="row mb-4">
+    <div class="col-12">
+        <form action="/user/search" method="get">
+            <div class="input-group w-75">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="search-icon"><i class="fas fa-search"></i></span>
+                </div>
+                <input type="text" name="query" class="form-control" placeholder="Search for documents..."
+                       style="font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="d-flex flex-wrap" th:if="${!#lists.isEmpty(documents)}">
+    <!-- Thymeleaf loop for search results -->
+    <div class="card mr-3 mb-3" style="width: 18rem;" th:each="doc : ${documents}">
+        <img th:src="${doc.background}" class="card-img-top" alt="Document Thumbnail">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${doc.name}"></h5>
+            <p class="card-text">
+                Author: <span th:text="${doc.owner.name}"></span><br>
+                Views: <span th:text="${doc.views}"></span><br>
+                Uploaded: <span th:text="${doc.dateUploaded}"></span>
+            </p>
+            <a th:href="@{/view-detail/{id}(id=${doc.docId})}" class="btn btn-primary">View</a>
+        </div>
+    </div>
+</div>
+<div class="d-flex flex-wrap" th:if="${#lists.isEmpty(documents)}">
+    <p class="text-center">No result found!</p>
+</div>
+</html>

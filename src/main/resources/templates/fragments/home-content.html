@@ -4,7 +4,15 @@
     <!-- Thanh tìm kiếm -->
     <div class="row mb-4">
         <div class="col-12">
-            <input type="text" class="form-control" placeholder="Search for documents...">
+            <form action="/user/search" method="get">
+                <div class="input-group w-75">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="search-icon"><i class="fas fa-search"></i></span>
+                    </div>
+                    <input type="text" name="query" class="form-control w-75" placeholder="Search for documents..."
+                           style="font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                </div>
+            </form>
         </div>
     </div>
 
@@ -12,47 +20,22 @@
     <div class="row mb-4">
         <div class="col-12 d-flex justify-content-between align-items-center">
             <h4>Recently Viewed Documents</h4>
-            <a href="/recent-documents" class="btn btn-outline-primary">More</a>
+            <a href="/user/recent-documents" class="btn btn-outline-primary">More</a>
         </div>
         <div class="d-flex flex-wrap">
-            <!-- Dữ liệu giả, thay thế bằng vòng lặp từ backend -->
-            <div class="card mr-3 mb-3" style="width: 18rem;">
-                <img src="/images/document1.jpg" class="card-img-top" alt="Document Thumbnail">
+            <!-- Thymeleaf loop for recent documents -->
+            <div class="card mr-3 mb-3" style="width: 18rem;" th:each="doc : ${recentDocuments}">
+                <img th:src="${doc.background}" class="card-img-top" alt="Document Thumbnail">
                 <div class="card-body">
-                    <h5 class="card-title">Sample Document Title</h5>
+                    <h5 class="card-title" th:text="${doc.name}"></h5>
                     <p class="card-text">
-                        Author: John Doe<br>
-                        Views: 120<br>
-                        Uploaded: 2024-01-01
+                        Author: <span th:text="${doc.owner.name}"></span><br>
+                        Views: <span th:text="${doc.views}"></span><br>
+                        Uploaded: <span th:text="${doc.dateUploaded}"></span>
                     </p>
-                    <a href="/view-detail/1" class="btn btn-primary">View</a>
+                    <a th:href="@{/view-detail/{id}(id=${doc.docId})}" class="btn btn-primary">View</a>
                 </div>
             </div>
-            <div class="card mr-3 mb-3" style="width: 18rem;">
-                <img src="/images/document1.jpg" class="card-img-top" alt="Document Thumbnail">
-                <div class="card-body">
-                    <h5 class="card-title">Sample Document Title</h5>
-                    <p class="card-text">
-                        Author: John Doe<br>
-                        Views: 120<br>
-                        Uploaded: 2024-01-01
-                    </p>
-                    <a href="/view-detail/1" class="btn btn-primary">View</a>
-                </div>
-            </div>
-            <div class="card mr-3 mb-3" style="width: 18rem;">
-                <img src="/images/document1.jpg" class="card-img-top" alt="Document Thumbnail">
-                <div class="card-body">
-                    <h5 class="card-title">Sample Document Title</h5>
-                    <p class="card-text">
-                        Author: John Doe<br>
-                        Views: 120<br>
-                        Uploaded: 2024-01-01
-                    </p>
-                    <a href="/view-detail/1" class="btn btn-primary">View</a>
-                </div>
-            </div>
-            <!-- Thêm các thẻ card khác cho các tài liệu đã xem -->
         </div>
     </div>
 
@@ -60,92 +43,43 @@
     <div class="row mb-4">
         <div class="col-12 d-flex justify-content-between align-items-center">
             <h4>Recommended Documents</h4>
-            <a href="/recommended-documents" class="btn btn-outline-primary">More</a>
+            <a href="/user/recommended-documents" class="btn btn-outline-primary">More</a>
         </div>
         <div class="d-flex flex-wrap">
-            <!-- Dữ liệu giả, thay thế bằng vòng lặp từ backend -->
-            <div class="card mr-3 mb-3" style="width: 18rem;">
-                <img src="/images/document2.jpg" class="card-img-top" alt="Document Thumbnail">
+            <!-- Thymeleaf loop for recommended documents -->
+            <div class="card mr-3 mb-3" style="width: 18rem;" th:each="doc : ${recommendedDocuments}">
+                <img th:src="${doc.background}" class="card-img-top" alt="Document Thumbnail">
                 <div class="card-body">
-                    <h5 class="card-title">Another Sample Document</h5>
+                    <h5 class="card-title" th:text="${doc.name}"></h5>
                     <p class="card-text">
-                        Author: Jane Smith<br>
-                        Views: 80<br>
-                        Uploaded: 2024-01-05
+                        Author: <span th:text="${doc.owner.name}"></span><br>
+                        Views: <span th:text="${doc.views}"></span><br>
+                        Uploaded: <span th:text="${doc.dateUploaded}"></span>
                     </p>
-                    <a href="/view-detail/2" class="btn btn-primary">View</a>
+                    <a th:href="@{/view-detail/{id}(id=${doc.docId})}" class="btn btn-primary">View</a>
                 </div>
             </div>
-            <div class="card mr-3 mb-3" style="width: 18rem;">
-                <img src="/images/document2.jpg" class="card-img-top" alt="Document Thumbnail">
-                <div class="card-body">
-                    <h5 class="card-title">Another Sample Document</h5>
-                    <p class="card-text">
-                        Author: Jane Smith<br>
-                        Views: 80<br>
-                        Uploaded: 2024-01-05
-                    </p>
-                    <a href="/view-detail/2" class="btn btn-primary">View</a>
-                </div>
-            </div>
-            <div class="card mr-3 mb-3" style="width: 18rem;">
-                <img src="/images/document2.jpg" class="card-img-top" alt="Document Thumbnail">
-                <div class="card-body">
-                    <h5 class="card-title">Another Sample Document</h5>
-                    <p class="card-text">
-                        Author: Jane Smith<br>
-                        Views: 80<br>
-                        Uploaded: 2024-01-05
-                    </p>
-                    <a href="/view-detail/2" class="btn btn-primary">View</a>
-                </div>
-            </div>
-            <!-- Thêm các thẻ card khác cho các tài liệu được đề xuất -->
         </div>
     </div>
 
-    <!-- Thông tin tài khoản -->
+    <!-- Thông tin thống kê trong tháng -->
     <div class="row mt-4">
         <div class="col-md-4">
-            <div class="card p-3" >
-                <h5>Followers</h5>
-                <p>Followers this month: 35</p>
-                <!-- Thay bằng: <p th:text="${user.followerCount}">Followers this month: 0</p> -->
+            <div class="card p-3">
+                <h5>You've uploaded this month:</h5>
+                <p th:text="${documentsUploaded}"></p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card p-3">
-                <h5>Document Views</h5>
-                <p>Document views this month: 120</p>
-                <!-- Thay bằng: <p th:text="${user.documentViews}">Document views this month: 0</p> -->
+                <h5>You've earned this month:</h5>
+                <p th:text="${commission}">USD</p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card p-3">
-                <h5>Document Likes</h5>
-                <p>Likes this month: 25</p>
-                <!-- Thay bằng: <p th:text="${user.documentLikes}">Likes this month: 0</p> -->
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card p-3">
-                <h5>Document Comments</h5>
-                <p>Comments this month: 10</p>
-                <!-- Thay bằng: <p th:text="${user.documentComments}">Comments this month: 0</p> -->
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card p-3">
-                <h5>Downloads</h5>
-                <p>Downloads this month: 45</p>
-                <!-- Thay bằng: <p th:text="${user.documentDownloads}">Downloads this month: 0</p> -->
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card p-3">
-                <h5>Revenue</h5>
-                <p>$15.00 earned this month</p>
-                <!-- Thay bằng: <p th:text="${user.revenue}">$0.00 earned this month</p> -->
+                <h5>Followers increased this month:</h5>
+                <p th:text="${newFollowers}">people</p>
             </div>
         </div>
     </div>

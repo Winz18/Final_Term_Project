@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Entity
 @Table(name = "User")
@@ -33,9 +34,11 @@ public class User {
     private boolean isAdmin;
     private boolean isActive;
     private boolean isVIP;
+    private long followers;
 
     @Column(name = "last_login")
     private LocalDateTime lastLogin;
+
 }
 
 

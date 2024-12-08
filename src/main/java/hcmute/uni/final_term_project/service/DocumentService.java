@@ -129,4 +129,25 @@ public class DocumentService {
             throw new IllegalArgumentException("Document owner must be a valid and existing user.");
         }
     }
+
+    // Lấy danh sách tài liệu được đề xuất
+    public List<Document> getRecommendedDocuments() {
+        return documentRepository.findTop3ByOrderByDownloadsDesc();
+    }
+
+    // Lấy số lượt xem của tài liệu
+    public int getDocumentViewsCount() {
+        return documentRepository.findAll().stream().mapToInt(Document::getViews).sum();
+    }
+
+    // Lấy số lượt tải xuống của tài liệu
+    public int getDocumentDownloadsCount() {
+        return documentRepository.findAll().stream().mapToInt(Document::getDownloads).sum();
+    }
+
+    // lấy so luot like cua tai lieu
+    public int getDocumentLikesCount() {
+        return documentRepository.findAll().stream().mapToInt(Document::getLikes).sum();
+    }
+
 }

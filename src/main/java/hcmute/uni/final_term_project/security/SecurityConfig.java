@@ -30,7 +30,7 @@ public class SecurityConfig {
                 )
                 .formLogin(login -> login
                         .loginPage("/login") // Trang login tùy chỉnh
-                        .defaultSuccessUrl("/user-home", true) // Chuyển hướng khi login thành công
+                        .defaultSuccessUrl("/user/home", true) // Chuyển hướng khi login thành công
                         .failureUrl("/login?error=true") // Chuyển hướng khi login thất bại
                         .permitAll() // Cho phép mọi người truy cập trang login
                 )

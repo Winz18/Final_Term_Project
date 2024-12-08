@@ -49,7 +49,7 @@ public class AuthController {
             // Đăng nhập thành công
             User user = userService.getUserByEmail(email);
             userService.updateLastLogin(user.getUserId()); // Cập nhật thời gian đăng nhập cuối cùng
-            return "redirect:/user-home";
+            return "redirect:/user/home";
 
         } catch (AuthenticationException e) {
             // Đăng nhập thất bại
