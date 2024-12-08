@@ -14,7 +14,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Controller
@@ -44,9 +50,40 @@ public class UserProfileController {
     }
 
     @PostMapping("/update-profile")
-    public String updateProfile(@RequestParam("name") String name, @RequestParam("bio") String bio, @RequestParam("email") String email, Model model) {
-        userService.updateProfile(name, bio, email);
+    public String updateProfile(@RequestParam("name") String name,
+                                @RequestParam("bio") String bio,
+                                @RequestParam("email") String email,
+                                @RequestParam("avatar") MultipartFile file,
+                                Model model) throws IOException {
+
+        // lưu avatar vào upload folder
+        if (!file.isEmpty()){
+            // Xóa avatar cũ
+            String oldAvartarPathStr = "uploads/";
+            oldAvartarPathStr += userService.getCurrentUser().getAvatar();
+            Path oldAvartarPath = Paths.get(oldAvartarPathStr);
+            try {
+                Files.deleteIfExists(oldAvartarPath);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new IllegalArgumentException("Failed to delete old avartar file.");
+            }
+
+            // Lưu avatar mới
+            String avatarDir = "uploads/avatars/";
+            String avatarFileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+            Path avatarPath = Paths.get(avatarDir);
+            if (!Files.exists(avatarPath)) {
+                Files.createDirectories(avatarPath);
+            }
+            Path savedDocumentPath = avatarPath.resolve(avatarFileName);
+            Files.copy(file.getInputStream(), savedDocumentPath, StandardCopyOption.REPLACE_EXISTING);
+            userService.updateProfile(name, bio, email, "avatars/" + avatarFileName);
+        }
+        else {
+            userService.updateProfile(name, bio, email, userService.getCurrentUser().getAvatar());
+        }
+
         return "redirect:/user/profile";
     }
-
 }

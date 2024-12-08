@@ -26,7 +26,10 @@
             </p>
             <div class="btn-group">
                 <a th:href="@{/user/view-detail/{id}(id=${document.docId})}" class="btn btn-primary">View</a>
-                <button class="btn btn-danger">Delete</button>
+                <form th:action="@{/user/delete-document/{id}(id=${document.docId})}" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
             </div>
         </div>
     </div>

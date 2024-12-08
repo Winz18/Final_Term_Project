@@ -228,7 +228,7 @@ public class UserService {
         return userRepository.countDocumentUploaded(user.getUserId(), startOfMonth, endOfMonth);
     }
 
-    public void updateProfile(String name, String bio, String email) {
+    public void updateProfile(String name, String bio, String email, String avatarFileName) {
         User user = getCurrentUser();
         if (user == null) {
             throw new IllegalArgumentException("User is not logged in.");
@@ -237,6 +237,7 @@ public class UserService {
         user.setName(name);
         user.setBio(bio);
         user.setEmail(email);
+        user.setAvatar(avatarFileName);
         userRepository.save(user);
     }
 }

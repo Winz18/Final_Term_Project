@@ -2,12 +2,12 @@
 <link rel="stylesheet" href="/css/my-profile-content.css">
 <div class="profile-container">
     <!-- Avatar -->
-    <img th:src="${avatar}" alt="Avatar" class="profile-avatar">
+    <img th:src="'/uploads/' + ${avatar}" alt="Avatar" class="profile-avatar">
 
     <!-- User Information -->
     <div class="profile-info">
-        <h5 th:text="${currentUserName}"></h5>
-        <h6 th:text="${bio}"></h6>
+        <h4 th:text="${currentUserName}"></h4>
+        <h5 th:text="'&quot;' + ${bio} + '&quot;'"></h5>
         <p th:text="'Followers: ' + ${followers}"></p>
         <p th:text="'Uploaded Documents: ' + ${documentsUploaded}"></p>
         <p th:text="'Contact: ' + ${email}"></p>
@@ -16,7 +16,8 @@
 
     <!-- Edit Form -->
     <div class="edit-form" id="editForm">
-        <form action="/user/update-profile" method="post">
+        <form action="/user/update-profile" method="post" enctype="multipart/form-data">
+            <input type="file" id="avatar" name="avatar" accept="image/*">
             <input type="text" name="name" placeholder="Username" th:value="${currentUserName}">
             <input type="text" name="email" placeholder="Contact" th:value="${email}">
             <textarea name="bio" rows="4" placeholder="Bio" th:text="${bio}"></textarea>

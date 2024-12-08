@@ -9,12 +9,15 @@
         <h3 th:text="${document.name}">Document Title</h3>
         <p th:text="'Author: ' + ${document.owner.name}">Author: John Doe</p>
         <p th:text="'Uploaded on: ' + ${document.dateUploaded}">Uploaded on: 2024-01-01</p>
-        <p class="university-info" th:text="'University/Institute: ' + ${document.university}">University/Institute: Harvard University</p>
+        <p class="university-info" th:text="'University/Institute: ' + ${document.university}">University/Institute:
+            Harvard University</p>
         <div class="stats">
             <span><i class="fas fa-eye"></i> <span th:text="${document.views}">120</span> views</span>
             <span><i class="fas fa-thumbs-up"></i> <span th:text="${document.likes}">45</span> likes</span>
             <span><i class="fas fa-download"></i> <span th:text="${document.downloads}">30</span> downloads</span>
-            <button onclick="likeDocument()">Like</button>
+            <form id="like-form" th:action="@{/user/like-document/{id}(id=${document.docId})}" method="post">
+                <button type="submit">Like</button>
+            </form>
             <button onclick="downloadDocument()">Download</button>
         </div>
         <!-- Hashtags về thể loại -->
@@ -27,7 +30,8 @@
 
     <!-- Nếu là chủ sở hữu -->
     <div class="owner-actions" style="margin-top: 20px;">
-        <a class="btn btn-primary" th:if="${isOwner}" th:href="@{/user/edit-document/{id}(id=${document.docId})}">Edit Document</a>
+        <a class="btn btn-primary" th:if="${isOwner}" th:href="@{/user/edit-document/{id}(id=${document.docId})}">Edit
+            Document</a>
     </div>
 
     <!-- Phần bình luận -->

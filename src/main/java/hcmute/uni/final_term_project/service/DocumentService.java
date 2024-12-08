@@ -123,6 +123,20 @@ public class DocumentService {
         documentRepository.save(document);
     }
 
+    // Cập nhật lượt like
+    public void incrementLikes(Long documentId) {
+        if (documentId == null || documentId <= 0) {
+            throw new IllegalArgumentException("Document ID must be a positive number.");
+        }
+        Optional<Document> optionalDocument = documentRepository.findById(documentId);
+        if (optionalDocument.isEmpty()) {
+            throw new IllegalArgumentException("Document with ID " + documentId + " does not exist.");
+        }
+        Document document = optionalDocument.get();
+        document.setLikes(document.getLikes() + 1);
+        documentRepository.save(document);
+    }
+
     // Kiểm tra tính hợp lệ của Document
     private void validateDocument(Document document) {
         if (document == null) {
@@ -169,5 +183,13 @@ public class DocumentService {
     // lấy so luot like cua tai lieu
     public int getDocumentLikesCount() {
         return documentRepository.findAll().stream().mapToInt(Document::getLikes).sum();
+    }
+
+    public void deleteDocument(Document doc) {
+        documentRepository.delete(doc);
+    }
+
+    public Object findDocumentById(Long documentId) {
+        return documentRepository.findById(documentId);
     }
 }

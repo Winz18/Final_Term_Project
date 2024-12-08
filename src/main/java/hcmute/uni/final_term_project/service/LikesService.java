@@ -51,7 +51,7 @@ public class LikesService {
     }
 
     // Đếm số lượt like của một tài liệu
-    public long countLikesByDocument(Document document) {
+    public int countLikesByDocument(Document document) {
         if (document == null || document.getDocId() == null) {
             throw new IllegalArgumentException("Document cannot be null or without an ID.");
         }

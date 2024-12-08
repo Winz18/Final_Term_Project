@@ -29,5 +29,11 @@ public class Likes {
 
     @Column(nullable = false)
     private LocalDateTime time;
+
+    public Likes(User user, Document document, LocalDateTime time) {
+        this.user = user;
+        this.document = document;
+        this.time = time;
+    }
 }
 

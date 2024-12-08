@@ -77,8 +77,8 @@ public class UserDocumentController {
         model.addAttribute("document", doc);
 
         // Lấy danh sách người dùng đã like tài liệu này
-        List<Likes> likes = likesService.getLikesByDocument(doc);
-        model.addAttribute("likes", likes.size());
+        int likes = documentService.getDocumentLikesCount();
+        model.addAttribute("likes", likes);
 
         // Lấy danh sách bình luận của tài liệu
         List<Comment> comments = commentService.getCommentsByDocument(doc);
@@ -314,5 +314,63 @@ public class UserDocumentController {
             model.addAttribute("error", "Error saving files. Please try again.");
             return "user/edit-doc";
         }
+    }
+
+    // endpoint for delete document
+    @PostMapping("/delete-document/{id}")
+    public String deleteDocument(@PathVariable("id") Long documentId) {
+        // Lấy tài liệu theo ID
+        Optional<Document> document = documentService.getDocumentById(documentId);
+        Document doc = document.orElseThrow(() -> new IllegalArgumentException("Document not found"));
+
+        // Kiểm tra xem người dùng hiện có phải là chủ sở hữu của tài liệu hay không
+        if (!doc.getOwner().getUserId().equals(userService.getCurrentUser().getUserId())) {
+            return "redirect:/user/my-documents";
+        }
+
+        // Xóa file tài liệu
+        String documentPathStr = "uploads/";
+        documentPathStr += doc.getPath();
+        Path documentPath = Paths.get(documentPathStr);
+        try {
+            Files.deleteIfExists(documentPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new IllegalArgumentException("Failed to delete document file.");
+        }
+
+        // Xóa file thumbnail
+        String thumbnailPathStr = "uploads/";
+        thumbnailPathStr += doc.getBackground();
+        Path thumbnailPath = Paths.get(thumbnailPathStr);
+        try {
+            Files.deleteIfExists(thumbnailPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new IllegalArgumentException("Failed to delete thumbnail file.");
+        }
+
+        // Xóa tài liệu khỏi cơ sở dữ liệu
+        documentService.deleteDocument(doc);
+
+        // Chuyển hướng về trang tài liệu của tôi
+        return "redirect:/user/my-documents";
+    }
+
+    // endpoint for like a document
+    @PostMapping("/like-document/{id}")
+    public String likeDocument(@PathVariable("id") Long documentId) {
+        // Lấy tài liệu theo ID
+        Optional<Document> document = documentService.getDocumentById(documentId);
+        Document doc = document.orElseThrow(() -> new IllegalArgumentException("Document not found"));
+
+        // cập nhật số lượt like
+        if (!likesService.userHasLikedDocument(userService.getCurrentUser(), doc)) {
+            likesService.addLike(userService.getCurrentUser(), doc);
+            documentService.incrementLikes(doc.getDocId());
+        }
+
+        // Chuyển hướng về trang chi tiết tài liệu
+        return "redirect:/user/view-detail/" + documentId;
     }
 }
