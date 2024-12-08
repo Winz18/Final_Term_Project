@@ -3,9 +3,13 @@ package hcmute.uni.final_term_project.service;
 import hcmute.uni.final_term_project.entity.User;
 import hcmute.uni.final_term_project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +21,26 @@ public class UserService {
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    // Lấy User ID của người dùng hiện tại
+    public Long getCurrentUserId() {
+        User user = getCurrentUser(); // Truy xuất entity User
+        return user != null ? user.getUserId() : null;
+    }
+
+    // Lấy entity User hiện tại
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                String email = ((UserDetails) principal).getUsername();
+                // Giả định bạn đã có một repository để lấy user bằng email
+                return userRepository.findByEmail(email);
+            }
+        }
+        return null; // Trả về null nếu không có user
     }
 
     // Lấy tất cả người dùng
@@ -49,9 +73,9 @@ public class UserService {
     }
 
     // Tạo mới hoặc cập nhật thông tin người dùng
-    public User saveOrUpdateUser(User user) {
+    public void saveOrUpdateUser(User user) {
         validateUser(user);
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     // Xóa người dùng theo ID
@@ -156,5 +180,61 @@ public class UserService {
 
     public long countOnlineUsers() {
         return userRepository.countByIsActive(true);
+    // Lấy doanh thu trong tháng của người dùng hiện tại
+    public double getCommissionThisMonth() {
+        User user = getCurrentUser();
+        if (user == null) {
+            throw new IllegalArgumentException("User is not logged in.");
+        }
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime startOfMonth = now.with(TemporalAdjusters.firstDayOfMonth());
+        LocalDateTime endOfMonth = now.with(TemporalAdjusters.lastDayOfMonth());
+        Double commission = userRepository.sumCommissionValue(user.getUserId(), startOfMonth, endOfMonth);
+        return commission != null ? commission : 0.0;
+    }
+
+    // Đếm số follower của người dùng hiện tại
+    public long countFollowersOfCurrentUser() {
+        long currentUserId = getCurrentUserId();
+        return userRepository.countFollowers(currentUserId);
+    }
+
+    // Đếm số follower tăng trong tháng của người dùng hiện tại
+    public long countNewFollowersThisMonth() {
+        User user = getCurrentUser();
+        if (user == null) {
+            throw new IllegalArgumentException("User is not logged in.");
+        }
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime startOfMonth = now.with(TemporalAdjusters.firstDayOfMonth());
+        LocalDateTime endOfMonth = now.with(TemporalAdjusters.lastDayOfMonth());
+        return userRepository.countNewFollowers(user.getUserId(), startOfMonth, endOfMonth);
+    }
+
+    // Đếm số document đã upload trong tháng của người dùng hiện tại
+    public long countDocumentUploadedThisMonth() {
+        User user = getCurrentUser();
+        if (user == null) {
+            throw new IllegalArgumentException("User is not logged in.");
+        }
+
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime startOfMonth = now.with(TemporalAdjusters.firstDayOfMonth());
+        LocalDateTime endOfMonth = now.with(TemporalAdjusters.lastDayOfMonth());
+        return userRepository.countDocumentUploaded(user.getUserId(), startOfMonth, endOfMonth);
+    }
+
+    public void updateProfile(String name, String bio, String email) {
+        User user = getCurrentUser();
+        if (user == null) {
+            throw new IllegalArgumentException("User is not logged in.");
+        }
+
+        user.setName(name);
+        user.setBio(bio);
+        user.setEmail(email);
+        userRepository.save(user);
     }
 }

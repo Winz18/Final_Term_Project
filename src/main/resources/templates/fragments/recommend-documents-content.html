@@ -1,59 +1,30 @@
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="content">
 <link rel="stylesheet" href="/css/recent-recommend.css">
 <div class="recent-documents-container">
-    <!-- Thanh tìm kiếm và bộ lọc -->
-    <div class="search-and-filter">
-        <div class="search-bar">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search for documents...">
-        </div>
-        <div class="filter-options">
-            <select>
-                <option value="">Filter by Name</option>
-                <option value="a-z">A-Z</option>
-                <option value="z-a">Z-A</option>
-            </select>
-            <select>
-                <option value="">Filter by Time</option>
-                <option value="newest">Newest</option>
-                <option value="oldest">Oldest</option>
-            </select>
+    <!-- Thanh tìm kiếm -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <form action="/user/search" method="get">
+                <div class="input-group w-75">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="search-icon"><i class="fas fa-search"></i></span>
+                    </div>
+                    <input type="text" name="query" class="form-control w-75" placeholder="Search for documents..."
+                           style="font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                </div>
+            </form>
         </div>
     </div>
-
-    <!-- Danh sách tài liệu -->
     <div class="documents-grid">
-        <!-- Dữ liệu giả -->
-        <div class="document-card">
-            <img src="/images/sample1.jpg" alt="Document Thumbnail">
-            <h5>Sample Document 1</h5>
+        <div class="document-card doc" th:each="doc : ${recommendedDocuments}">
+            <img th:src="'/uploads/' +${doc.background}" alt="Document Thumbnail">
+            <h5 th:text="${doc.name}"></h5>
             <p class="card-text">
-                Author: John Doe<br>
-                Views: 120<br>
-                Uploaded: 2024-01-01
+                Author: <span th:text="${doc.owner.name}"></span><br>
+                Views: <span th:text="${doc.views}"></span><br>
+                Uploaded: <span th:text="${doc.dateUploaded}"></span>
             </p>
-            <button>View</button>
-        </div>
-        <div class="document-card">
-            <img src="/images/sample2.jpg" alt="Document Thumbnail">
-            <h5>Sample Document 2</h5>
-            <p class="card-text">
-                Author: John Doe<br>
-                Views: 120<br>
-                Uploaded: 2024-01-01
-            </p>
-            <button>View</button>
-        </div>
-        <div class="document-card">
-            <img src="/images/sample3.jpg" alt="Document Thumbnail">
-            <h5>Sample Document 3</h5>
-            <p>Author: abc</p>
-            <p class="card-text">
-                Author: John Doe<br>
-                Views: 120<br>
-                Uploaded: 2024-01-01
-            </p>
-            <button>View</button>
+            <a th:href="@{/user/view-detail/{id}(id=${doc.docId})}" class="btn btn-primary">View</a>
         </div>
     </div>
 
@@ -64,3 +35,64 @@
         <li><a href="?page=3">3</a></li>
     </ul>
 </div>
+
+<script>
+    // function to filter documents by name
+    function filterByName() {
+        // get the value of the selected option
+        let filterValue = document.querySelector('.filter-options select:nth-child(1)').value;
+        // get all document cards
+        let documentCards = document.querySelectorAll('.document-card');
+        // convert the NodeList to an array
+        let documentCardsArray = Array.from(documentCards);
+
+        // sort the array based on the filter value
+        if (filterValue === 'a-z') {
+            documentCardsArray.sort((a, b) => {
+                return a.querySelector('h5').textContent.localeCompare(b.querySelector('h5').textContent);
+            });
+        } else if (filterValue === 'z-a') {
+            documentCardsArray.sort((a, b) => {
+                return b.querySelector('h5').textContent.localeCompare(a.querySelector('h5').textContent);
+            });
+        }
+
+        // remove all document cards from the container
+        document.querySelector('.recent-documents-container').innerHTML = '';
+
+        // add the sorted document cards back to the container
+        documentCardsArray.forEach(card => {
+            document.querySelector('.recent-documents-container').appendChild(card);
+        });
+    }
+
+    // function to filter documents by time
+    function filterByTime() {
+        // get the value of the selected option
+        let filterValue = document.querySelector('.filter-options select:nth-child(2)').value;
+        // get all document cards
+        let documentCards = document.querySelectorAll('.document-card');
+        // convert the NodeList to an array
+        let documentCardsArray = Array.from(documentCards);
+
+        // sort the array based on the filter value
+        if (filterValue === 'newest') {
+            documentCardsArray.sort((a, b) => {
+                return new Date(b.querySelector('.card-text span:nth-child(3)').textContent) - new Date(a.querySelector('.card-text span:nth-child(3)').textContent);
+            });
+        } else if (filterValue === 'oldest') {
+            documentCardsArray.sort((a, b) => {
+                return new Date(a.querySelector('.card-text span:nth-child(3)').textContent) - new Date(b.querySelector('.card-text span:nth-child(3)').textContent);
+            });
+        }
+
+        // remove all document cards from the container
+        document.querySelector('.recent-documents-container').innerHTML = '';
+
+        // add the sorted document cards back to the container
+        documentCardsArray.forEach(card => {
+            document.querySelector('.recent-documents-container').appendChild(card);
+        });
+    }
+</script>
+</html>

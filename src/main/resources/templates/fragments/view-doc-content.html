@@ -2,18 +2,18 @@
 <link rel="stylesheet" href="/css/view-doc.css">
 <div class="document-view-container">
     <!-- Hiển thị tài liệu PDF -->
-    <iframe src="https://ptable.com/print/periodic-table.pdf" class="document-pdf" title="Document Viewer"></iframe>
+    <iframe th:src="@{'/uploads/' + ${document.path}}" class="document-pdf" title="Document Viewer"></iframe>
 
     <!-- Thông tin tài liệu -->
     <div class="document-info">
-        <h3>Document Title</h3>
-        <p>Author: John Doe</p>
-        <p>Uploaded on: 2024-01-01</p>
-        <p class="university-info">University/Institute: Harvard University</p>
+        <h3 th:text="${document.name}">Document Title</h3>
+        <p th:text="'Author: ' + ${document.owner.name}">Author: John Doe</p>
+        <p th:text="'Uploaded on: ' + ${document.dateUploaded}">Uploaded on: 2024-01-01</p>
+        <p class="university-info" th:text="'University/Institute: ' + ${document.university}">University/Institute: Harvard University</p>
         <div class="stats">
-            <span><i class="fas fa-eye"></i> 120 views</span>
-            <span><i class="fas fa-thumbs-up"></i> 45 likes</span>
-            <span><i class="fas fa-download"></i> 30 downloads</span>
+            <span><i class="fas fa-eye"></i> <span th:text="${document.views}">120</span> views</span>
+            <span><i class="fas fa-thumbs-up"></i> <span th:text="${document.likes}">45</span> likes</span>
+            <span><i class="fas fa-download"></i> <span th:text="${document.downloads}">30</span> downloads</span>
             <button onclick="likeDocument()">Like</button>
             <button onclick="downloadDocument()">Download</button>
         </div>
@@ -27,7 +27,7 @@
 
     <!-- Nếu là chủ sở hữu -->
     <div class="owner-actions" style="margin-top: 20px;">
-        <button onclick="editDocument()">Edit Document</button>
+        <button th:if="${isOwner}" onclick="editDocument()">Edit Document</button>
     </div>
 
     <!-- Phần bình luận -->
@@ -38,13 +38,9 @@
             <button onclick="postComment()">Post Comment</button>
         </div>
         <ul class="comment-list">
-            <li>
-                <p class="author">Jane Doe</p>
-                <p>This is an amazing document. Thanks for sharing!</p>
-            </li>
-            <li>
-                <p class="author">Michael Smith</p>
-                <p>Very helpful for my project. Appreciate it!</p>
+            <li th:each="comment : ${comments}">
+                <p class="author" th:text="${comment.user.name}">Jane Doe</p>
+                <p th:text="${comment.content}">This is an amazing document. Thanks for sharing!</p>
             </li>
         </ul>
     </div>

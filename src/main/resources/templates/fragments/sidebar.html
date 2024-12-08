@@ -1,15 +1,18 @@
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="sidebar">
 <link rel="stylesheet" href="/css/sidebar.css">
 <div class="d-flex flex-column p-3 sidebar">
-    <h5 th:text="${userName}" class="username">Nguyen Thang Loi</h5>
-    <p class="username">0 Followers | 0 Uploads</p>
-    <button type="button" class="btn btn-primary mb-3 w-100">+ Upload</button>
+    <h5 th:text="${currentUserName}" class="username">Nguyen Thang Loi</h5>
+    <p th:text="${followers} + ' Followers | ' + ${documentsUploaded} + ' Uploads'" class="username"></p>
+    <button type="button" class="btn btn-primary mb-3 w-100" onclick="location.href='/user/upload-document'">+ Upload</button>
     <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-            <a href="#" class="nav-link"><i class="fas fa-home"></i> Home</a>
+            <a href="/user/home" class="nav-link"><i class="fas fa-home"></i> Home</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link"><i class="fas fa-book"></i> My Docs</a>
+            <a href="/user/my-documents" class="nav-link"><i class="fas fa-book"></i> My Docs</a>
+        </li>
+        <li class="nav-item">
+            <a href="/user/profile" class="nav-link"><i class="fas fa-user"></i> My Profile</a>
         </li>
         <li class="nav-item">
             <a href="#" class="nav-link"><i class="fas fa-cog"></i> Setting</a>
@@ -18,10 +21,10 @@
             <a href="#" class="nav-link"><i class="fas fa-registered"></i> Subscription</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link"><i class="fas fa-history"></i> Recent</a>
+            <a href="/user/recent-documents" class="nav-link"><i class="fas fa-history"></i> Recent</a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link"><i class="fas fa-thumbs-up"></i> Recommend</a>
+            <a href="/user/recommended-documents" class="nav-link"><i class="fas fa-thumbs-up"></i> Recommend</a>
         </li>
     </ul>
 </div>

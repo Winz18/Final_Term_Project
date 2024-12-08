@@ -17,9 +17,14 @@ public interface DocumentRepository extends JpaRepository<Document, Long> {
     List<Document> findByNameContaining(String keyword); // Tìm kiếm tài liệu theo tên
     List<Document> findByOrderByDateUploadedDesc(); // Tài liệu mới nhất
     List<Document> findByOrderByViewsDesc(); // Tài liệu nhiều lượt xem nhất
+  
     List<Document> findByOrderByDownloadsDesc(); // Tài liệu được tải xuống nhiều nhất
     @Query("SELECT d.cateTags FROM Document d")
     List<String> findAllTags();
     @Query("SELECT COUNT(d) FROM Document d WHERE DATE(d.dateUploaded) = CURRENT_DATE")
     long countDocumentsUploadedToday();
+  
+    List<Document> findTop3ByOrderByDownloadsDesc(); // Tài liệu được tải xuống nhiều nhất
+    List<Document> findTop3ByOrderByViewsDesc();
+
 }
