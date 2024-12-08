@@ -1,4 +1,4 @@
-let tags = ['#Science', '#Technology'];
+let tags = [];
 
 function addTag(event) {
     if (event.key === 'Enter') {
@@ -24,7 +24,7 @@ function renderTags() {
       ${tags.map(tag => `
         <span class="tag">${tag} <i class="fas fa-times" onclick="removeTag('${tag}')"></i></span>
       `).join('')}
-      <input type="text" id="tag-input" placeholder="Add a tag" onkeypress="addTag(event)">
+      <input type="text" id="tag-input" name="tags" placeholder="Add a tag" onkeypress="addTag(event)">
     `;
 }
 

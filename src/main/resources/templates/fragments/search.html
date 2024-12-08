@@ -18,7 +18,7 @@
 <div class="d-flex flex-wrap" th:if="${!#lists.isEmpty(documents)}">
     <!-- Thymeleaf loop for search results -->
     <div class="card mr-3 mb-3" style="width: 18rem;" th:each="doc : ${documents}">
-        <img th:src="${doc.background}" class="card-img-top" alt="Document Thumbnail">
+        <img th:src="'/uploads/' +${doc.background}" class="card-img-top" alt="Document Thumbnail">
         <div class="card-body">
             <h5 class="card-title" th:text="${doc.name}"></h5>
             <p class="card-text">

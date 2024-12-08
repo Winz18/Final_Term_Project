@@ -27,7 +27,7 @@
 
     <!-- Nếu là chủ sở hữu -->
     <div class="owner-actions" style="margin-top: 20px;">
-        <button th:if="${isOwner}" onclick="editDocument()">Edit Document</button>
+        <a class="btn btn-primary" th:if="${isOwner}" th:href="@{/user/edit-document/{id}(id=${document.docId})}">Edit Document</a>
     </div>
 
     <!-- Phần bình luận -->

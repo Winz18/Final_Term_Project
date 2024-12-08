@@ -3,37 +3,46 @@
 <div class="edit-document-container">
     <h3>Edit Document</h3>
 
-    <form id="editDocumentForm" onsubmit="saveChanges(event)">
+    <form id="uploadForm" th:action="@{/user/edit-document/{id}(id=${document.docId})}" method="post" enctype="multipart/form-data">
         <!-- Tải lên tài liệu -->
-        <label for="document-file">Replace Document (PDF/DOCX only)</label>
-        <input type="file" id="document-file" accept=".pdf, .docx">
+        <label for="document-file">Select Document (PDF/DOCX only)</label>
+        <input type="file" id="document-file" name="file" accept=".pdf, .docx">
 
         <!-- Ảnh đại diện -->
-        <label for="thumbnail">Replace Thumbnail</label>
-        <input type="file" id="thumbnail" accept="image/*">
+        <label for="thumbnail">Upload Thumbnail</label>
+        <input type="file" id="thumbnail" name="thumbnail" accept="image/*">
 
         <!-- Tên tài liệu -->
         <label for="document-title">Document Title</label>
-        <input type="text" id="document-title" value="Existing Document Title" required>
+        <input type="text" id="document-title" name="title" placeholder="Enter document title" required
+               th:value="${document.name}">
 
         <!-- Tác giả -->
         <label for="author-name">Author Name</label>
-        <input type="text" id="author-name" value="John Doe" required>
+        <input type="text" id="author-name" name="authorName" placeholder="Enter author name" required
+               th:value="${currentUserName}">
 
         <!-- Thể loại (Hashtag) -->
         <label for="tags-input">Categories (Hashtags)</label>
         <div class="tags-input" id="tags-input">
-            <span class="tag">#Science <i class="fas fa-times" onclick="removeTag('#Science')"></i></span>
-            <span class="tag">#Technology <i class="fas fa-times" onclick="removeTag('#Technology')"></i></span>
-            <input type="text" id="tag-input" placeholder="Add a tag" onkeypress="addTag(event)">
+            <input type="text" id="tag-input" name="tags" placeholder="Add a tag" onkeypress="addTag(event)"
+                   th:value="${document.cateTags}">
         </div>
 
         <!-- Trường đại học -->
         <label for="university">University/Institute</label>
-        <input type="text" id="university" value="Harvard University">
+        <input type="text" id="university" name="university" placeholder="Enter university/institute name"
+               th:value="${document.university}">
 
-        <!-- Nút lưu thay đổi -->
-        <button type="submit">Save Changes</button>
+        <!-- Bật chế độ kiếm tiền -->
+        <div class="vip-only">
+            <input type="checkbox" id="earnings-mode" name="earningsMode" value="true" th:disabled="${!isVIP}">
+            <label for="earnings-mode">Enable Earnings Mode (VIP Members Only)</label>
+        </div>
+        <input type="hidden" name="earningsMode" value="false">
+
+        <!-- Nút upload -->
+        <button type="submit">Upload Document</button>
     </form>
 </div>
 

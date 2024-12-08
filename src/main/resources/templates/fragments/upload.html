@@ -31,6 +31,13 @@
         <label for="university">University/Institute</label>
         <input type="text" id="university" name="university" placeholder="Enter university/institute name">
 
+        <!-- Bật chế độ kiếm tiền -->
+        <div class="vip-only">
+            <input type="checkbox" id="earnings-mode" name="earningsMode" value="true" th:disabled="${!isVIP}">
+            <label for="earnings-mode">Enable Earnings Mode (VIP Members Only)</label>
+        </div>
+        <input type="hidden" name="earningsMode" value="false">
+
         <!-- Nút upload -->
         <button type="submit">Upload Document</button>
     </form>
