@@ -68,7 +68,7 @@
             <!-- Tiêu đề và form -->
             <h2 class="text-center mb-4">Chào mừng bạn đến với chúng tôi!</h2>
             <p class="text-center mb-3 text-muted">Tạo tài khoản để bắt đầu</p>
-            <form action="/register" method="POST">
+            <form th:action="@{/register}" method="POST">
                 <div class="form-group">
                     <label for="username">Tài khoản</label>
                     <input type="text" id="username" name="username" class="form-control" placeholder="Nhập tài khoản" required>

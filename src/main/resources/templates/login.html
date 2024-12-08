@@ -28,13 +28,13 @@
         <p class="text-center text-muted mb-4">Vui lòng đăng nhập để tiếp tục</p>
 
         <!-- Login Form -->
-        <form action="/login" method="POST">
+        <form th:action="@{/login}" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Tài khoản</label>
                 <input
                         type="text"
                         id="username"
-                        name="username"
+                        name="email"
                         class="form-control"
                         placeholder="Nhập tài khoản"
                         required

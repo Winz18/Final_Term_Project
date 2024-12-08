@@ -180,13 +180,13 @@ public class UserService {
 
     public long countOnlineUsers() {
         return userRepository.countByIsActive(true);
+    }
     // Lấy doanh thu trong tháng của người dùng hiện tại
     public double getCommissionThisMonth() {
         User user = getCurrentUser();
         if (user == null) {
             throw new IllegalArgumentException("User is not logged in.");
         }
-
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startOfMonth = now.with(TemporalAdjusters.firstDayOfMonth());
         LocalDateTime endOfMonth = now.with(TemporalAdjusters.lastDayOfMonth());

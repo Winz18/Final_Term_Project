@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AuthController {
@@ -32,6 +33,7 @@ public class AuthController {
     @GetMapping("/login")
     public String showLoginPage(Model model) {
         model.addAttribute("error", null); // Để thông báo lỗi (nếu có)
+        System.out.print("CCCC");
         return "login"; // templates/login.html
     }
 
@@ -48,6 +50,7 @@ public class AuthController {
 
             // Đăng nhập thành công
             User user = userService.getUserByEmail(email);
+            System.out.print(email);
             userService.updateLastLogin(user.getUserId()); // Cập nhật thời gian đăng nhập cuối cùng
             return "redirect:/user/home";
 
@@ -67,16 +70,21 @@ public class AuthController {
 
     // Xử lý đăng ký tài khoản
     @PostMapping("/register")
-    public String handleRegister(@ModelAttribute("user") User user, Model model) {
+    public String handleRegister(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password,
+            @RequestParam("numberphone") String numberphone,
+            @RequestParam("email") String email,
+            @RequestParam("birthdate") String birthdate,
+            @RequestParam("status") String status,
+            Model model
+    ) {
         try {
+            User user = new User();
             // Kiểm tra email đã tồn tại
-            if (userService.getUserByEmail(user.getEmail()) != null) {
-                model.addAttribute("error", "Email đã tồn tại!");
-                return "register";
-            }
-
-            // Mã hóa mật khẩu
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setName(username);
+            user.setEmail(email);
+            user.setPassword(passwordEncoder.encode(password));
 
             // Thiết lập các giá trị mặc định
             user.setActive(true);
