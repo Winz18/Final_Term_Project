@@ -180,6 +180,8 @@ public class UserService {
 
     public long countOnlineUsers() {
         return userRepository.countByIsActive(true);
+    }
+
     // Lấy doanh thu trong tháng của người dùng hiện tại
     public double getCommissionThisMonth() {
         User user = getCurrentUser();

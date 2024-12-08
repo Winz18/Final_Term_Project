@@ -123,7 +123,6 @@ public class UserDocumentController {
                                  @RequestParam("thumbnail") MultipartFile thumbnail,
                                  @RequestParam("authorName") String authorName,
                                  @RequestParam("tags") String tags,
-                                 @RequestParam("earningsMode") boolean earningsMode,
                                  Model model) {
         try {
             // Kiểm tra file tài liệu và thumbnail
@@ -144,7 +143,7 @@ public class UserDocumentController {
             document.setOwner(userService.getCurrentUser());
             document.setUniversity(university);
             document.setCateTags(tags);
-            document.setVIP(earningsMode);
+            document.setVIP(userService.getCurrentUser().isVIP());
             document.setDateUploaded(LocalDateTime.now());
 
             // Lưu tài liệu vào thư mục uploads/documents
