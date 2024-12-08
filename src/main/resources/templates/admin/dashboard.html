@@ -26,30 +26,27 @@
                     <div class="col-12">
                         <h3 class="mb-3">Users</h3>
                     </div>
-                    <!-- Total Users -->
                     <div class="col-md-4">
                         <div class="card text-white bg-primary mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">Users</h5>
-                                <p class="card-text">100 registered users</p>
+                                <p class="card-text" th:text="${totalUsers} + ' registered users'"></p>
                             </div>
                         </div>
                     </div>
-                    <!-- VIP Users -->
                     <div class="col-md-4">
                         <div class="card text-white bg-warning mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">VIP Users</h5>
-                                <p class="card-text">10 VIP users</p>
+                                <p class="card-text" th:text="${vipUsers} + ' VIP users'"></p>
                             </div>
                         </div>
                     </div>
-                    <!-- Online Users -->
                     <div class="col-md-4">
                         <div class="card text-white bg-secondary mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">Currently Online</h5>
-                                <p class="card-text">25 users online</p>
+                                <p class="card-text" th:text="${onlineUsers} + ' users online'"></p>
                             </div>
                         </div>
                     </div>
@@ -60,21 +57,19 @@
                     <div class="col-12">
                         <h3 class="mb-3">Documents</h3>
                     </div>
-                    <!-- Total Documents -->
                     <div class="col-md-6">
                         <div class="card text-white bg-success mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">Documents</h5>
-                                <p class="card-text">200 documents</p>
+                                <p class="card-text" th:text="${totalDocuments} + ' documents'"></p>
                             </div>
                         </div>
                     </div>
-                    <!-- Documents Uploaded Today -->
                     <div class="col-md-6">
                         <div class="card text-white bg-danger mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">Today's Uploads</h5>
-                                <p class="card-text">10 documents uploaded today</p>
+                                <p class="card-text" th:text="${todaysUploads} + ' documents uploaded today'"></p>
                             </div>
                         </div>
                     </div>
@@ -85,36 +80,34 @@
                     <div class="col-12">
                         <h3 class="mb-3">Revenue</h3>
                     </div>
-                    <!-- Daily Revenue -->
                     <div class="col-md-4">
                         <div class="card text-white bg-info mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">Daily Revenue</h5>
-                                <p class="card-text">₫500,000 Today</p>
+                                <p class="card-text" th:text="'₫' + ${dailyRevenue} + ' Today'"></p>
                             </div>
                         </div>
                     </div>
-                    <!-- Monthly Revenue -->
                     <div class="col-md-4">
                         <div class="card text-white bg-info mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">Monthly Revenue</h5>
-                                <p class="card-text">₫15,000,000 This Month</p>
+                                <p class="card-text" th:text="'₫' + ${monthlyRevenue} + ' This Month'"></p>
                             </div>
                         </div>
                     </div>
-                    <!-- Yearly Revenue -->
                     <div class="col-md-4">
                         <div class="card text-white bg-info mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">Yearly Revenue</h5>
-                                <p class="card-text">₫180,000,000 This Year</p>
+                                <p class="card-text" th:text="'₫' + ${yearlyRevenue} + ' This Year'"></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </main>
 </div>
 <!-- Footer -->

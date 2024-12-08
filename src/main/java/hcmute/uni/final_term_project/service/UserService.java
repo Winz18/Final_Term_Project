@@ -166,11 +166,20 @@ public class UserService {
         if (userOptional.isEmpty()) {
             throw new IllegalArgumentException("User with ID " + userId + " does not exist.");
         }
-
         User user = userOptional.get();
         return user.isVIP();
     }
 
+    public long countAllUsers() {
+        return userRepository.count();
+    }
+
+    public long countVipUsers() {
+        return userRepository.countByIsVIPTrue();
+    }
+
+    public long countOnlineUsers() {
+        return userRepository.countByIsActive(true);
     // Lấy doanh thu trong tháng của người dùng hiện tại
     public double getCommissionThisMonth() {
         User user = getCurrentUser();

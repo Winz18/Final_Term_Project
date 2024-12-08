@@ -15,7 +15,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByNameContaining(String keyword); // Tìm user theo tên
     long countByIsActiveTrue(); // Đếm số user đang hoạt động
     long countByIsVIPTrue(); // Đếm số user VIP
-
+    long countByIsActive(boolean b);
+  
     // Lấy danh thu trong tháng của người dùng hiện tại
     @Query("SELECT SUM(c.value) FROM Commission c WHERE c.user.userId = :userId " +
             "AND c.date BETWEEN :startDate AND :endDate")
@@ -40,5 +41,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // Đếm số lượng tài liệu mà người dùng đã upload
     @Query("SELECT COUNT(d) FROM Document d WHERE d.owner.userId = :userId")
     long countByDocumentsUploaded(Long userId);
-
 }
