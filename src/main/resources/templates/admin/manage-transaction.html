@@ -80,33 +80,22 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>SUB001</td>
-                            <td>USR001</td>
-                            <td>2023-12-01</td>
-                            <td>2024-12-01</td>
-                            <td>Annual</td>
-                            <td>₫1,200,000</td>
-                            <td>Yes</td>
-                            <td>PROMO123</td>
+                        <tr th:each="subscription, iterStat : ${subscriptions}">
+                            <td th:text="${iterStat.index + 1}"></td>
+                            <td th:text="${subscription.subId}"></td>
+                            <td th:text="${subscription.user.userId}"></td>
+                            <td th:text="${#temporals.format(subscription.startDate, 'yyyy-MM-dd')}"></td>
+                            <td th:text="${#temporals.format(subscription.endDate, 'yyyy-MM-dd')}"></td>
+                            <td th:text="${subscription.type}"></td>
+                            <td th:text="${subscription.value*1000} + ' VND'"></td>
+                            <td th:text="${subscription.usePromo ? 'Yes' : 'No'}"></td>
+                            <td th:text="${subscription.promo != null ? subscription.promo.promoId : '-'}"></td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>SUB002</td>
-                            <td>USR002</td>
-                            <td>2023-06-01</td>
-                            <td>2023-12-01</td>
-                            <td>Half-Year</td>
-                            <td>₫600,000</td>
-                            <td>No</td>
-                            <td>-</td>
-                        </tr>
-                        <!-- Add data here -->
                         </tbody>
                     </table>
                 </div>
             </div>
+
 
             <!-- Statistics Section -->
             <div class="row mt-5">
@@ -121,13 +110,16 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td id="totalSubscribers">0</td>
-                            <td id="totalRevenue">₫0</td>
+                            <td th:text="${totalSubscribers}">0</td>
+                            <td th:text="${totalRevenue*1000}">₫0</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+
+
+
         </div>
 
     </main>

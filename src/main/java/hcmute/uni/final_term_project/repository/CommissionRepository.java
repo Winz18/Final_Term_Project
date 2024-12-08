@@ -25,4 +25,13 @@ public interface CommissionRepository extends JpaRepository<Commission, Long> {
             @Param("endDate") LocalDate endDate
     );
 
+    List<Commission> findByPaid(boolean b);
+    @Query("SELECT SUM(c.value) FROM Commission c WHERE DATE(c.date) = CURRENT_DATE")
+    long getDailyRevenue();
+
+    @Query("SELECT SUM(c.value) FROM Commission c WHERE MONTH(c.date) = MONTH(CURRENT_DATE) AND YEAR(c.date) = YEAR(CURRENT_DATE)")
+    long getMonthlyRevenue();
+
+    @Query("SELECT SUM(c.value) FROM Commission c WHERE YEAR(c.date) = YEAR(CURRENT_DATE)")
+    long getYearlyRevenue();
 }

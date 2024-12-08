@@ -23,6 +23,9 @@ public class Commission {
     private Double value;
 
     @Column(nullable = false)
+    private Boolean paid;// Amount already paid (default to 0)
+
+    @Column(nullable = false)
     private LocalDateTime date;
 
     @ManyToOne

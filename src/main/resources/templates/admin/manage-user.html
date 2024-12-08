@@ -28,35 +28,37 @@
             </div>
 
             <!-- Search and Filter -->
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <!-- Search Bar -->
-                    <input
-                            type="text"
-                            class="form-control"
-                            id="userSearch"
-                            placeholder="Search users by name, email..."
-                    />
+            <form action="">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <!-- Search Bar -->
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="userSearch"
+                                placeholder="Search users by name, email..."
+                        />
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <!-- Filter Combo Box -->
+                        <select class="form-select w-auto d-inline-block" id="userFilter">
+                            <option value="">Filter by...</option>
+                            <option value="name">Name</option>
+                            <option value="date">Created Date</option>
+                            <option value="posts">Post Count</option>
+                            <option value="vip">VIP Status</option>
+                            <option value="active">Active Status</option>
+                        </select>
+                        <button class="btn btn-primary ms-2">Apply</button>
+                    </div>
                 </div>
-                <div class="col-md-6 text-end">
-                    <!-- Filter Combo Box -->
-                    <select class="form-select w-auto d-inline-block" id="userFilter">
-                        <option value="">Filter by...</option>
-                        <option value="name">Name</option>
-                        <option value="date">Created Date</option>
-                        <option value="posts">Post Count</option>
-                        <option value="vip">VIP Status</option>
-                        <option value="active">Active Status</option>
-                    </select>
-                    <button class="btn btn-primary ms-2">Apply</button>
-                </div>
-            </div>
+            </form>
 
             <!-- Users Table -->
             <div class="row">
                 <div class="col-12">
                     <h2 class="h4 mb-3">User List</h2>
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped" id="addUserButton" th:data-url="@{/admin/users/delete}">
                         <thead class="table-dark">
                         <tr>
                             <th>#</th>
@@ -75,45 +77,31 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><img src="https://via.placeholder.com/50" alt="John Doe" class="rounded-circle"></td>
-                            <td>John Doe</td>
-                            <td>john@example.com</td>
-                            <td>$2y$12$abcd1234...</td>
-                            <td>Yes</td>
-                            <td>2023-12-01 10:00</td>
-                            <td>Active</td>
-                            <td>Yes</td>
-                            <td>50</td>
-                            <td>120</td>
-                            <td>75</td>
+                        <!-- Sử dụng Thymeleaf để lặp qua danh sách người dùng -->
+                        <tbody>
+                        <tr th:each="data, iterStat : ${userData}">
+                            <td th:text="${iterStat.index + 1}">1</td>
                             <td>
-                                <button class="btn btn-primary btn-sm">View</button>
-                                <button class="btn btn-warning btn-sm" onclick="openEditForm('1')">Edit</button>
-                                <button class="btn btn-danger btn-sm">Delete</button>
+                                <img th:src="${data.user.avatar != null ? data.user.avatar : 'https://via.placeholder.com/50'}"
+                                     th:alt="${data.user.name}" class="rounded-circle">
                             </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td><img src="https://via.placeholder.com/50" alt="Jane Smith" class="rounded-circle"></td>
-                            <td>Jane Smith</td>
-                            <td>jane@example.com</td>
-                            <td>$2y$12$efgh5678...</td>
-                            <td>No</td>
-                            <td>2023-11-30 08:30</td>
-                            <td>Inactive</td>
-                            <td>No</td>
-                            <td>30</td>
-                            <td>80</td>
-                            <td>45</td>
+                            <td th:text="${data.user.name}">John Doe</td>
+                            <td th:text="${data.user.email}">john@example.com</td>
+                            <td th:text="${data.user.password}">hidden_password</td>
+                            <td th:text="${data.user.isAdmin ? 'Yes' : 'No'}">Yes</td>
+                            <td th:text="${data.user.lastLogin}">2023-12-01 10:00</td>
+                            <td th:text="${data.user.isActive ? 'Active' : 'Inactive'}">Active</td>
+                            <td th:text="${data.user.isVIP ? 'Yes' : 'No'}">Yes</td>
+                            <td th:text="${data.downloads}">--</td> <!-- Số lượng Downloads -->
+                            <td th:text="${data.likes}">--</td> <!-- Số lượng Likes -->
+                            <td th:text="${data.followers}">--</td> <!-- Số lượng Followers -->
                             <td>
-                                <button class="btn btn-primary btn-sm">View</button>
-                                <button class="btn btn-warning btn-sm" onclick="openEditForm('2')">Edit</button>
-                                <button class="btn btn-danger btn-sm">Delete</button>
+                                <button class="btn btn-warning btn-sm" onclick="openEditForm(this)" th:data-id="${data.user.userId}">Edit</button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteOpen(this) " th:data-id="${data.user.userId}">Delete</button>
                             </td>
                         </tr>
                         </tbody>
+
                     </table>
                 </div>
             </div>
@@ -128,11 +116,11 @@
         </div>
     </main>
 </div>
-<!--form-->
+<!--form edit-->
 <div class="modal fade" id="userFormModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="userForm">
+            <form th:action="@{/admin/users/edit}" id="userForm" method="post" >
                 <div class="modal-header">
                     <h5 class="modal-title" id="userFormTitle"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -140,19 +128,27 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="userName" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="userName" required>
+                        <input type="text" class="form-control" id="userName" name="userName" required>
                     </div>
                     <div class="mb-3">
                         <label for="userEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="userEmail" required>
+                        <input type="email" class="form-control" id="userEmail" name="userEmail" required>
                     </div>
                     <div class="mb-3">
-                        <label for="userPhone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="userPhone" required>
+                        <label for="userPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="userPassword" name="userPassword">
                     </div>
-                    <div class="mb-3">
-                        <label for="userDob" class="form-label">Date of Birth</label>
-                        <input type="date" class="form-control" id="userDob" required>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="userIsAdmin" name="userIsAdmin">
+                        <label class="form-check-label" for="userIsAdmin">Is Admin</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="userIsActive" name="userIsActive">
+                        <label class="form-check-label" for="userIsActive">Is Active</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="userIsVIP" name="userIsVIP">
+                        <label class="form-check-label" for="userIsVIP">Is VIP</label>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -163,28 +159,108 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="userFormModal2" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form  th:action="@{/admin/users/add}" method="post" >
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userFormTitle3"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="userName" class="form-label">Name</label>
+                        <input type="text" class="form-control" name="userName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="userEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="userPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="userPassword">
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="userIsAdmin">
+                        <label class="form-check-label" for="userIsAdmin">Is Admin</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="userIsActive">
+                        <label class="form-check-label" for="userIsActive">Is Active</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="userIsVIP">
+                        <label class="form-check-label" for="userIsVIP">Is VIP</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="userFormModal3" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form  th:action="@{/admin/users/delete}" method="post" >
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userFormTitle2"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <input type="hidden" class="form-control" id="deleteid" name="userId" required>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script>
     function openAddForm() {
-        document.getElementById('userFormTitle').innerText = 'Add User';
+        document.getElementById('userFormTitle3').innerText = 'Add User';
         document.getElementById('userForm').reset();
-        new bootstrap.Modal(document.getElementById('userFormModal')).show();
+        new bootstrap.Modal(document.getElementById('userFormModal2')).show();
     }
 
-    function openEditForm(userId) {
-        // Sample data. Replace with actual backend data.
-        const userData = {
-            '1': { name: 'John Doe', email: 'john@example.com', phone: '123-456-7890', dob: '1990-05-15' },
-            '2': { name: 'Jane Smith', email: 'jane@example.com', phone: '987-654-3210', dob: '1985-07-20' },
-        };
+    function openEditForm(button) {
+        // Lấy userId từ thuộc tính data-id của nút Edit
+        const userId = button.getAttribute("data-id");
 
-        const user = userData[userId];
-        document.getElementById('userFormTitle').innerText = 'Edit User';
-        document.getElementById('userName').value = user.name;
-        document.getElementById('userEmail').value = user.email;
-        document.getElementById('userPhone').value = user.phone;
-        document.getElementById('userDob').value = user.dob;
+        // Lấy hàng (row) tương ứng với userId trong bảng
+        const row = button.closest("tr");
+
+        // Lấy dữ liệu từ các cột trong hàng
+        const name = row.querySelector("td:nth-child(3)").innerText;
+        const email = row.querySelector("td:nth-child(4)").innerText;
+        const password = row.querySelector("td:nth-child(5)").innerText;
+        const isAdmin = row.querySelector("td:nth-child(6)").innerText === "Yes";
+        const isActive = row.querySelector("td:nth-child(8)").innerText === "Active";
+        const isVIP = row.querySelector("td:nth-child(9)").innerText === "Yes";
+
+        // Điền dữ liệu vào form modal
+        document.getElementById('userFormTitle').innerText = `Edit User (ID: ${userId})`;
+        document.getElementById('userName').value = name;
+        document.getElementById('userEmail').value = email;
+        document.getElementById('userPassword').value = password; // Password placeholder, chỉ hiển thị khi cần
+        document.getElementById('userIsAdmin').checked = isAdmin;
+        document.getElementById('userIsActive').checked = isActive;
+        document.getElementById('userIsVIP').checked = isVIP;
+
+        // Hiển thị modal
         new bootstrap.Modal(document.getElementById('userFormModal')).show();
     }
+    function deleteOpen(button) {
+        document.getElementById('userForm').reset();
+        const userId = button.getAttribute("data-id");
+        const row = button.closest("tr");
+        document.getElementById('userFormTitle2').innerText = `Delete User (ID: ${userId})`;
+        document.getElementById('deleteid').value = userId;
+        new bootstrap.Modal(document.getElementById('userFormModal3')).show();
+    }
+
 </script>
 <!-- Footer -->
 <footer th:insert="fragments/footer :: footer"></footer>

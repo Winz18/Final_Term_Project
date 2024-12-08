@@ -3,6 +3,7 @@ package hcmute.uni.final_term_project.repository;
 import hcmute.uni.final_term_project.entity.Document;
 import hcmute.uni.final_term_project.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,4 +18,8 @@ public interface DocumentRepository extends JpaRepository<Document, Long> {
     List<Document> findByOrderByDateUploadedDesc(); // Tài liệu mới nhất
     List<Document> findByOrderByViewsDesc(); // Tài liệu nhiều lượt xem nhất
     List<Document> findByOrderByDownloadsDesc(); // Tài liệu được tải xuống nhiều nhất
+    @Query("SELECT d.cateTags FROM Document d")
+    List<String> findAllTags();
+    @Query("SELECT COUNT(d) FROM Document d WHERE DATE(d.dateUploaded) = CURRENT_DATE")
+    long countDocumentsUploadedToday();
 }

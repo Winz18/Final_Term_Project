@@ -6,8 +6,11 @@ import hcmute.uni.final_term_project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DocumentService {
@@ -128,5 +131,16 @@ public class DocumentService {
         if (document.getOwner() == null || userRepository.findById(document.getOwner().getUserId()).isEmpty()) {
             throw new IllegalArgumentException("Document owner must be a valid and existing user.");
         }
+    }
+    public List<String> getAllTags() {
+        // Lấy tất cả các cate_tags từ bảng document và loại bỏ các giá trị null
+        List<String> rawTags = documentRepository.findAllTags();
+
+        // Tách các tag (nếu cate_tags lưu dạng "#tag1,#tag2")
+        return rawTags.stream()
+                .filter(Objects::nonNull) // Loại bỏ null
+                .flatMap(tags -> Arrays.stream(tags.split(","))) // Tách tag bằng dấu phẩy
+                .distinct() // Loại bỏ các tag trùng lặp
+                .collect(Collectors.toList());
     }
 }

@@ -12,4 +12,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByNameContaining(String keyword); // Tìm user theo tên
     long countByIsActiveTrue(); // Đếm số user đang hoạt động
     long countByIsVIPTrue(); // Đếm số user VIP
+
+
+    long countByIsActive(boolean b);
 }
