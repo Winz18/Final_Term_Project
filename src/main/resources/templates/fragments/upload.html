@@ -21,14 +21,6 @@
         <input type="text" id="author-name" name="authorName" placeholder="Enter author name" required
                th:value="${currentUserName}">
 
-        <!-- Bật chế độ kiếm tiền -->
-        <div class="vip-only">
-            <input type="checkbox" id="earnings-mode" name="earningsMode" th:disabled="${!isVIP}">
-            <label for="earnings-mode">Enable Earnings Mode (VIP Members Only)</label>
-        </div>
-        <p class="vip-warning" id="vip-warning" style="display: none;">You must be a VIP Member to enable this
-            option.</p>
-
         <!-- Thể loại (Hashtag) -->
         <label for="tags-input">Categories (Hashtags)</label>
         <div class="tags-input" id="tags-input">
