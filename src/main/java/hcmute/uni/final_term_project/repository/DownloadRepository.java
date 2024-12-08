@@ -16,4 +16,5 @@ public interface DownloadRepository extends JpaRepository<Download, Long> {
     long countByDocument(Document document); // Số lượt tải của một tài liệu
     long countByUser(User user); // Số lượt tải của một user
 
+    boolean existsByUserAndDocument(User currentUser, Document doc);
 }

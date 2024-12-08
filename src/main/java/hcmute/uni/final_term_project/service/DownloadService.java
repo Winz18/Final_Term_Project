@@ -109,4 +109,14 @@ public class DownloadService {
             throw new IllegalArgumentException("Download time cannot be null.");
         }
     }
+
+    public boolean userHasDownloadedDocument(User currentUser, Document doc) {
+        if (currentUser == null || currentUser.getUserId() == null) {
+            throw new IllegalArgumentException("User cannot be null or without an ID.");
+        }
+        if (doc == null || doc.getDocId() == null) {
+            throw new IllegalArgumentException("Document cannot be null or without an ID.");
+        }
+        return downloadRepository.existsByUserAndDocument(currentUser, doc);
+    }
 }

@@ -18,7 +18,7 @@
             <form id="like-form" th:action="@{/user/like-document/{id}(id=${document.docId})}" method="post">
                 <button type="submit">Like</button>
             </form>
-            <button onclick="downloadDocument()">Download</button>
+            <button th:onclick="'window.location.href=\'/user/download-document/' + ${document.docId} + '\''">Download</button>
         </div>
         <!-- Hashtags về thể loại -->
         <div class="tags-container">

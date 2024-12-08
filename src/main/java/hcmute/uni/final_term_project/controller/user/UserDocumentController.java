@@ -6,6 +6,10 @@ import hcmute.uni.final_term_project.entity.Download;
 import hcmute.uni.final_term_project.entity.Likes;
 import hcmute.uni.final_term_project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -76,17 +80,9 @@ public class UserDocumentController {
 
         model.addAttribute("document", doc);
 
-        // Lấy danh sách người dùng đã like tài liệu này
-        int likes = documentService.getDocumentLikesCount();
-        model.addAttribute("likes", likes);
-
         // Lấy danh sách bình luận của tài liệu
         List<Comment> comments = commentService.getCommentsByDocument(doc);
         model.addAttribute("comments", comments);
-
-        // Lấy danh sách người dùng đã tải tài liệu này
-        List<Download> downloads = downloadService.getDownloadsByDocument(doc);
-        model.addAttribute("downloads", downloads.size());
 
         // Kiểm tra xem người dùng hiện có phải là chủ sở hữu của tài liệu hay không
         model.addAttribute("isOwner", doc.getOwner().getUserId().equals(userService.getCurrentUser().getUserId()));
@@ -99,6 +95,9 @@ public class UserDocumentController {
 
         // Lưu lịch sử xem tài liệu
         viewHistoryService.saveViewHistory(userService.getCurrentUser(), doc);
+
+        // Tăng số lượt xem của tài liệu
+        documentService.incrementViews(doc.getDocId());
 
         return "user/view-doc";
     }
@@ -372,5 +371,41 @@ public class UserDocumentController {
 
         // Chuyển hướng về trang chi tiết tài liệu
         return "redirect:/user/view-detail/" + documentId;
+    }
+
+    // endpoint for download a document
+    @GetMapping("/download-document/{id}")
+    public ResponseEntity<Resource> downloadDocument(@PathVariable("id") Long documentId) {
+        // Lấy tài liệu theo ID
+        Optional<Document> document = documentService.getDocumentById(documentId);
+        Document doc = document.orElseThrow(() -> new IllegalArgumentException("Document not found"));
+
+        // Kiểm tra quyền truy cập của người dùng
+        if (doc.isVIP() && !userService.getCurrentUser().isVIP()) {
+            throw new IllegalArgumentException("Only VIP members can download this document.");
+        }
+
+        try {
+            // Lấy đường dẫn file tài liệu
+            Path filePath = Paths.get("uploads/" + doc.getPath());
+            Resource resource = new UrlResource(filePath.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                // Tăng số lượt tải xuống
+                if (!downloadService.userHasDownloadedDocument(userService.getCurrentUser(), doc)) {
+                    downloadService.addDownload(userService.getCurrentUser(), doc);
+                    documentService.incrementDownloads(doc.getDocId());
+                }
+
+                // Trả về file tài liệu
+                return ResponseEntity.ok()
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                        .body(resource);
+            } else {
+                throw new IllegalArgumentException("Could not read the file!");
+            }
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error occurred while downloading the document.", e);
+        }
     }
 }
