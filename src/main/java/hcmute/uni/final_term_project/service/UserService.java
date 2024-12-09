@@ -240,4 +240,28 @@ public class UserService {
         user.setAvatar(avatarFileName);
         userRepository.save(user);
     }
+
+    public boolean changePassword(String oldPassword, String newPassword) {
+        User user = getCurrentUser();
+        if (user == null) {
+            throw new IllegalArgumentException("User is not logged in.");
+        }
+
+        if (!user.getPassword().equals(oldPassword)) {
+            return false;
+        }
+
+        user.setPassword(newPassword);
+        userRepository.save(user);
+        return true;
+    }
+
+    public void deleteAccount() {
+        User user = getCurrentUser();
+        if (user == null) {
+            throw new IllegalArgumentException("User is not logged in.");
+        }
+
+        userRepository.delete(user);
+    }
 }

@@ -86,4 +86,47 @@ public class UserProfileController {
 
         return "redirect:/user/profile";
     }
+
+    // endpoint setting page
+    @GetMapping("/setting")
+    public String showSettingsPage(Model model) {
+
+
+        // get data from current user
+        model.addAttribute("currentUserName", userService.getCurrentUser().getName());
+        model.addAttribute("isVIP", userService.getCurrentUser().isVIP());
+        model.addAttribute("avatar", userService.getCurrentUser().getAvatar());
+        model.addAttribute("followers", userService.getCurrentUser().getFollowers());
+        model.addAttribute("bio", userService.getCurrentUser().getBio());
+        model.addAttribute("email", userService.getCurrentUser().getEmail());
+        model.addAttribute("documentsUploaded", documentService.getDocumentsByOwner(userService.getCurrentUser()).size());
+
+        return "user/setting";
+    }
+
+    // endpoint to change password
+    @PostMapping("/setting/change-password")
+    public String changePassword(@RequestParam("oldPassword") String oldPassword,
+                                 @RequestParam("newPassword") String newPassword,
+                                 @RequestParam("confirmPassword") String confirmPassword,
+                                 Model model) {
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("error", "New password and confirm password do not match.");
+            return "redirect:/user/setting";
+        }
+
+        if (!userService.changePassword(oldPassword, newPassword)) {
+            model.addAttribute("error", "Old password is incorrect.");
+            return "redirect:/user/setting";
+        }
+
+        return "redirect:/user/setting";
+    }
+
+    // endpoint to delete account
+    @PostMapping("/setting/delete-account")
+    public String deleteAccount(Model model) {
+        userService.deleteAccount();
+        return "redirect:/logout";
+    }
 }

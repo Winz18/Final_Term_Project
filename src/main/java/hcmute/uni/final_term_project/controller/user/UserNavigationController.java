@@ -56,6 +56,11 @@ public class UserNavigationController {
         model.addAttribute("documentsUploaded", documentService.getDocumentsByOwner(userService.getCurrentUser()).size());
         model.addAttribute("documentsUploadedThisMonth", userService.countDocumentUploadedThisMonth());
 
+        // Nếu là admin thì redirect sang trang admin
+        if (userService.getCurrentUser().isAdmin()) {
+            return "redirect:/admin";
+        }
+
         return "user/user-home";
     }
 
