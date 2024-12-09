@@ -26,7 +26,7 @@ public interface CommissionRepository extends JpaRepository<Commission, Long> {
     );
 
     List<Commission> findByPaid(boolean b);
-    @Query("SELECT SUM(c.value) FROM Commission c WHERE DATE(c.date) = CURRENT_DATE")
+    @Query("SELECT COALESCE(SUM(c.value), 0) FROM Commission c WHERE c.date = CURRENT_DATE")
     long getDailyRevenue();
 
     @Query("SELECT SUM(c.value) FROM Commission c WHERE MONTH(c.date) = MONTH(CURRENT_DATE) AND YEAR(c.date) = YEAR(CURRENT_DATE)")
