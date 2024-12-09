@@ -27,4 +27,9 @@ public interface DocumentRepository extends JpaRepository<Document, Long> {
     List<Document> findTop3ByOrderByDownloadsDesc(); // Tài liệu được tải xuống nhiều nhất
     List<Document> findTop3ByOrderByViewsDesc();
 
+    @Query("SELECT d.cateTags FROM Document d GROUP BY d.cateTags ORDER BY COUNT(d) DESC")
+    List<String> findPopularTags();
+
+    @Query("SELECT d.university FROM Document d GROUP BY d.university ORDER BY COUNT(d) DESC")
+    List<String> findPopularUniversities();
 }

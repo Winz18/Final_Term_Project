@@ -1,25 +1,31 @@
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="navbar">
 <link rel="stylesheet" href="/css/navbar.css">
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #106cfc;">
-  <img src="/images/logo.png" width="65" height="65" alt="Logo"
-       style="color: white !important; border-radius: 10px">
-  <a class="navbar-brand" href="#">
-    BON
-  </a>
-  <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="#">Universities</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Categories</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Upgrade</a>
-  </ul>
-  <div class="d-flex align-items-center">
-    <a href="#" class="mr-3"><i class="fas fa-bell"></i></a>
-    <a href="#" class="mr-3"><i class="fas fa-user-circle"></i></a>
-  </div>
+    <img src="/images/logo.png" width="65" height="65" alt="Logo"
+         style="color: white !important; border-radius: 10px">
+    <a class="navbar-brand" href="#">
+        BON
+    </a>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/user/uni-doc">Universities</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/user/cate-doc">Categories</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Upgrade</a>
+    </ul>
+    <div class="d-flex align-items-center">
+        <a href="#" class="mr-3 dropdown-toggle" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false"><i class="fas fa-bell"></i></a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
+            <a class="dropdown-item" href="#">Notification 1</a>
+            <a class="dropdown-item" href="#">Notification 2</a>
+            <a class="dropdown-item" href="#">Notification 3</a>
+        </div>
+        <a href="/logout" class="mr-3"><i class="fas fa-sign-out-alt"></i></a>
+    </div>
 </nav>
 
 

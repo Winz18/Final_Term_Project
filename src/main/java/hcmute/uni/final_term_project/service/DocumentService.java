@@ -174,4 +174,15 @@ public class DocumentService {
         documentRepository.delete(doc);
     }
 
+    public List<String> getPopularTags() {
+        return documentRepository.findPopularTags();
+    }
+
+    public List<Document> getDocumentsByTag(String tag) {
+        return documentRepository.findByCateTagsContaining(tag);
+    }
+
+    public List<String> getPopularUniversities() {
+        return documentRepository.findPopularUniversities();
+    }
 }

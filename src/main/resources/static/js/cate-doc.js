@@ -1,26 +1,6 @@
 // Dữ liệu giả lập
 const documents = [
-    {
-        id: 1,
-        title: "Document Title 1",
-        uploader: "John Doe",
-        thumbnail: "/images/sample1.jpg",
-        hashtags: ["#Science", "#Technology"]
-    },
-    {
-        id: 2,
-        title: "Document Title 2",
-        uploader: "Jane Smith",
-        thumbnail: "/images/sample2.jpg",
-        hashtags: ["#Math", "#Physics"]
-    },
-    {
-        id: 3,
-        title: "Document Title 3",
-        uploader: "Michael Brown",
-        thumbnail: "/images/sample3.jpg",
-        hashtags: ["#Literature"]
-    }
+
 ];
 
 function searchByHashtag(event) {
@@ -45,7 +25,7 @@ function displayDocuments(query) {
             .map(
                 doc => `
         <div class="document-card">
-          <img src="${doc.thumbnail}" alt="Document Thumbnail">
+          <img src="'/uploads/' +${doc.background}" alt="Document Thumbnail">
           <h5>${doc.title}</h5>
           <p>Uploaded by ${doc.uploader}</p>
           <button onclick="viewDocument(${doc.id})">View Document</button>

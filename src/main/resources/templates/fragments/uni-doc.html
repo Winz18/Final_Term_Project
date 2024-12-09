@@ -1,32 +1,26 @@
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="content">
-<link rel="stylesheet" href="/css/uni-doc.css">
-<div class="university-documents-container">
+<link rel="stylesheet" href="/css/cate-doc.css">
+<div class="hashtag-search-container">
   <!-- Tiêu đề -->
-  <h3>Documents from <span id="university-name">University Name</span></h3>
+  <h3>Search by University</h3>
+
+  <!-- Thanh tìm kiếm -->
+  <div class="search-bar">
+    <i class="fas fa-search"></i>
+    <input type="text" id="hashtag-search-input" placeholder="Enter university..."
+           onkeypress="if(event.key === 'Enter') window.location.href='/user/uni-search?uni=' + encodeURIComponent(this.value);">
+  </div>
+
+  <!-- Hashtag phổ biến -->
+  <div class="popular-hashtags">
+    <a th:each="uni : ${universities}" th:text="${uni}" th:href="@{/user/uni-search(uni=${uni})}" class="hashtag">View</a>
+  </div>
 
   <!-- Danh sách tài liệu -->
-  <div class="documents-grid">
-    <!-- Dữ liệu mẫu -->
-    <div class="document-card">
-      <img src="/images/sample1.jpg" alt="Document Thumbnail">
-      <h5>Document Title 1</h5>
-      <p>Uploaded by John Doe</p>
-      <button onclick="viewDocument(1)">View Document</button>
-    </div>
-    <div class="document-card">
-      <img src="/images/sample2.jpg" alt="Document Thumbnail">
-      <h5>Document Title 2</h5>
-      <p>Uploaded by Jane Smith</p>
-      <button onclick="viewDocument(2)">View Document</button>
-    </div>
-    <div class="document-card">
-      <img src="/images/sample3.jpg" alt="Document Thumbnail">
-      <h5>Document Title 3</h5>
-      <p>Uploaded by Michael Brown</p>
-      <button onclick="viewDocument(3)">View Document</button>
-    </div>
+  <div class="documents-grid" id="documents-grid">
+    <!-- Kết quả tìm kiếm sẽ hiển thị ở đây -->
   </div>
 </div>
 
-<script src="/js/uni-doc.js"></script>
+<script src="/js/cate-doc.js"></script>
 </html>

@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="content">
+<link rel="stylesheet" href="/css/uni-doc.css">
+<div class="university-documents-container">
+    <!-- Tiêu đề -->
+    <h3>Documents with Tag: <span th:text="${tag}"></span></h3>
+
+    <!-- Thanh tìm kiếm -->
+    <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" id="hashtag-search-input" placeholder="Enter a hashtag..."
+               onkeypress="if(event.key === 'Enter') window.location.href='/user/cate-search?tag=' + encodeURIComponent(this.value);">
+    </div>
+
+    <!-- Danh sách tài liệu -->
+    <div class="documents-grid">
+        <div th:each="doc : ${documents}" class="document-card">
+            <img th:src="'/uploads/' +${doc.background}" alt="Document Thumbnail">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${doc.name}"></h5>
+                <p class="card-text">
+                    Author: <span th:text="${doc.owner.name}"></span><br>
+                    Views: <span th:text="${doc.views}"></span><br>
+                    Uploaded: <span th:text="${doc.dateUploaded}"></span>
+                </p>
+                <a th:href="@{/user/view-detail/{id}(id=${doc.docId})}" class="btn btn-primary">View</a>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
