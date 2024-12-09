@@ -264,4 +264,8 @@ public class UserService {
 
         userRepository.delete(user);
     }
+
+    public String hashPassword(String oldPassword) {
+        return oldPassword;
+    }
 }

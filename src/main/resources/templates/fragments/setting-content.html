@@ -5,13 +5,19 @@
 
     <!-- Change Password -->
     <div class="setting-section">
-        <label for="current-password">Current Password</label>
-        <input type="password" id="current-password" placeholder="Enter current password">
+        <form id="change-password-form" action="/user/setting/change-password" method="post"
+              enctype="multipart/form-data">
+            <label for="old-password">Current Password</label>
+            <input type="password" id="old-password" name="oldPassword" placeholder="Enter current password">
 
-        <label for="new-password">New Password</label>
-        <input type="password" id="new-password" placeholder="Enter new password">
+            <label for="new-password">New Password</label>
+            <input type="password" id="new-password" name="newPassword" placeholder="Enter new password">
 
-        <button onclick="savePassword()">Save Password</button>
+            <label for="confirm-password">New Password</label>
+            <input type="password" id="confirm-password" name="confirmPassword" placeholder="Enter new password again">
+
+            <button type="submit">Save Password</button>
+        </form>
     </div>
 
     <!-- Email Preferences -->
@@ -45,7 +51,9 @@
 
     <!-- Delete Account -->
     <div class="delete-account">
-        <button onclick="deleteAccount()">Delete Account</button>
+        <form id="delete-account-form" action="/user/setting/delete-account" method="post">
+            <button type="submit">Delete Account</button>
+        </form>
     </div>
 </div>
 <script src="/js/setting.js"></script>

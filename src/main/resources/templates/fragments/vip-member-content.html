@@ -4,13 +4,13 @@
     <h3>Subscription</h3>
 
     <!-- Nếu là VIP Member -->
-    <div class="current-status">
+    <div class="current-status" th:if="${isVIP}">
         <h4>Your VIP Status</h4>
-        <p>Plan: <strong>1-Year VIP Membership</strong></p>
-        <p>Start Date: <strong>2024-01-01</strong></p>
-        <p>Expiration Date: <strong>2025-01-01</strong></p>
+        <p>Plan: <strong th:text="${currentSubscription.type}">1-Year VIP Membership</strong></p>
+        <p>Start Date: <strong th:text="${currentSubscription.startDate}">2024-01-01</strong></p>
+        <p>Expiration Date: <strong th:text="${currentSubscription.endDate}">2025-01-01</strong></p>
         <div class="earnings-summary">
-            <p>This Month's Earnings: <strong>$120.00</strong></p>
+            <p>This Month's Earnings: <strong th:text="${commission}">$120.00</strong></p>
         </div>
     </div>
 
@@ -45,7 +45,7 @@
     function subscribe(plan) {
         alert(`You have selected the ${plan} plan. Redirecting to payment...`);
         // Chuyển hướng đến trang thanh toán
-        window.location.href = `/payment?plan=${plan}`;
+        window.location.href = `/user/payment?plan=${plan}`;
     }
 </script>
 </html>

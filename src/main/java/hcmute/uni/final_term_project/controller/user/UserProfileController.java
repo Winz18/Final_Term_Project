@@ -115,6 +115,9 @@ public class UserProfileController {
             return "redirect:/user/setting";
         }
 
+        // hash password
+        oldPassword = userService.hashPassword(oldPassword);
+
         if (!userService.changePassword(oldPassword, newPassword)) {
             model.addAttribute("error", "Old password is incorrect.");
             return "redirect:/user/setting";

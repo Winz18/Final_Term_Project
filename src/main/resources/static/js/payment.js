@@ -30,14 +30,14 @@ function processPayment(event) {
 
     // Xử lý thanh toán (giả lập)
     setTimeout(() => {
-        const isSuccess = Math.random() > 0.5; // Giả lập trạng thái thành công hoặc thất bại
+        const isSuccess = true; // Giả lập trạng thái thành công hoặc thất bại
         if (isSuccess) {
             paymentStatus.textContent = "Payment Successful!";
             paymentStatus.className = "status success";
             paymentStatus.style.display = "block";
             setTimeout(() => {
-                window.location.href = "/home"; // Chuyển về User Home sau khi thanh toán thành công
-            }, 2000);
+                window.location.href = "/user/home"; // Chuyển về User Home sau khi thanh toán thành công
+            }, 1000);
         } else {
             paymentStatus.textContent = "Payment Failed. Please try again.";
             paymentStatus.className = "status failure";

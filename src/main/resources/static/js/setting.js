@@ -1,5 +1,6 @@
 function savePassword() {
     alert('Password updated successfully!');
+
 }
 
 function savePreferences() {
