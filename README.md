@@ -1,8 +1,8 @@
-# Final Term Project
+# WebDev Course - Final Term Project
 
 ## Introduction
 
-**Final_Term_Project** is a web application developed using Spring Boot. The project's goal is to provide a data management platform with a user-friendly interface and support for business operations.
+**Final_Term_Project** is a web application developed using Spring Boot in my uni final term project. The project's goal is to provide a data management platform with a user-friendly interface and support for business operations.
 
 The project leverages modern technologies such as:
 - **Spring Boot** (Starter Web, Data JPA, Thymeleaf)
