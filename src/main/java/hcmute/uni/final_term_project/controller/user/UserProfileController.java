@@ -1,6 +1,5 @@
 package hcmute.uni.final_term_project.controller.user;
 
-import hcmute.uni.final_term_project.entity.Document;
 import hcmute.uni.final_term_project.service.DocumentService;
 import hcmute.uni.final_term_project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -30,7 +24,7 @@ public class UserProfileController {
     private final DocumentService documentService;
 
     @Autowired
-    public UserProfileController(UserService userService , DocumentService documentService) {
+    public UserProfileController(UserService userService, DocumentService documentService) {
         this.userService = userService;
         this.documentService = documentService;
     }
@@ -57,7 +51,7 @@ public class UserProfileController {
                                 Model model) throws IOException {
 
         // lưu avatar vào upload folder
-        if (!file.isEmpty()){
+        if (!file.isEmpty()) {
             // Xóa avatar cũ
             String oldAvartarPathStr = "uploads/";
             oldAvartarPathStr += userService.getCurrentUser().getAvatar();
@@ -79,8 +73,7 @@ public class UserProfileController {
             Path savedDocumentPath = avatarPath.resolve(avatarFileName);
             Files.copy(file.getInputStream(), savedDocumentPath, StandardCopyOption.REPLACE_EXISTING);
             userService.updateProfile(name, bio, email, "avatars/" + avatarFileName);
-        }
-        else {
+        } else {
             userService.updateProfile(name, bio, email, userService.getCurrentUser().getAvatar());
         }
 

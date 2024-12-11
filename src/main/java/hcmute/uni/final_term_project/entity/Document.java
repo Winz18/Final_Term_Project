@@ -37,6 +37,7 @@ public class Document {
     private String background;
     private String university;
     private int views;
+    private boolean isApproved;
 
     @Column(name = "cate_tags")
     private String cateTags;

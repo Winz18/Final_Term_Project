@@ -66,6 +66,11 @@ public class UserDocumentController {
 
         // Loại bỏ các document có tag = "del"
         myDocuments = myDocuments.stream().filter(document -> !document.getCateTags().equals("del")).toList();
+
+        // Loại bỏ các document chưa được duyệt
+        myDocuments = myDocuments.stream().filter(Document::isApproved).toList();
+
+        // Gán danh sách tài liệu vào model
         model.addAttribute("myDocuments", myDocuments);
 
         // Get info for sidebar
@@ -87,6 +92,16 @@ public class UserDocumentController {
         // Chỉ vip member mới được xem tài liệu vip
         if (doc.isVIP() && !userService.getCurrentUser().isVIP()) {
             return "redirect:/user/vip-member";
+        }
+
+        // Loại bỏ các document có tag = "del"
+        if (doc.getCateTags().equals("del")) {
+            return "redirect:/user/my-documents";
+        }
+
+        // Loại bỏ các document chưa được duyệt
+        if (!doc.isApproved()) {
+            return "redirect:/user/my-documents";
         }
 
         model.addAttribute("document", doc);
@@ -155,6 +170,10 @@ public class UserDocumentController {
             document.setCateTags(tags);
             document.setVIP(userService.getCurrentUser().isVIP() && earningsMode);
             document.setDateUploaded(LocalDateTime.now());
+            document.setLikes(0);
+            document.setDownloads(0);
+            document.setViews(0);
+            document.setApproved(false);
 
             // Lưu tài liệu vào thư mục uploads/documents
             String documentDir = "uploads/documents/";

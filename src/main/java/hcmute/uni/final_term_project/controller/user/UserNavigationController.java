@@ -40,12 +40,24 @@ public class UserNavigationController {
         // Lấy danh sách tài liệu đã xem gần đây (không trùng lặp)
         List<ViewHistory> recentViewedHistories = viewHistoryService.getTop3DistinctViewHistoryByUser(userService.getCurrentUser());
         List<Document> recentDocuments = recentViewedHistories.stream().map(ViewHistory::getDocument).toList();
+
+        // filter out deleted documents
         List<Document> filteredRecentDocuments = recentDocuments.stream().filter(document -> !document.getCateTags().equals("del")).toList();
+
+        // loại bỏ các tài liệu chưa được duyệt
+        filteredRecentDocuments = filteredRecentDocuments.stream().filter(Document::isApproved).toList();
+
         model.addAttribute("recentDocuments", filteredRecentDocuments);
 
         // Lấy danh sách tài liệu được đề xuất
         List<Document> recommendedDocuments = documentService.getRecommendedDocuments();
+
+        // filter out deleted documents
         List<Document> filteredRecommendedDocuments = recommendedDocuments.stream().filter(document -> !document.getCateTags().equals("del")).toList();
+
+        // loại bỏ các tài liệu chưa được duyệt
+        filteredRecommendedDocuments = filteredRecommendedDocuments.stream().filter(Document::isApproved).toList();
+
         model.addAttribute("recommendedDocuments", filteredRecommendedDocuments);
 
         // get data from current user
@@ -69,7 +81,13 @@ public class UserNavigationController {
     @GetMapping("/search")
     public String searchDocument(@RequestParam("query") String query, Model model) {
         List<Document> documents = documentService.searchDocumentsByName(query);
+
+        // filter out deleted documents
         List<Document> filteredDocuments = documents.stream().filter(document -> !document.getCateTags().equals("del")).toList();
+
+        // loại bỏ các tài liệu chưa được duyệt
+        filteredDocuments = filteredDocuments.stream().filter(Document::isApproved).toList();
+
         model.addAttribute("documents", filteredDocuments);
 
         // get data from current user
@@ -88,7 +106,13 @@ public class UserNavigationController {
         // Lấy danh sách tài liệu đã xem gần đây
         List<ViewHistory> recentViewedHistories = viewHistoryService.getDistinctViewHistoryByUser(userService.getCurrentUser());
         List<Document> recentDocuments = recentViewedHistories.stream().map(ViewHistory::getDocument).toList();
+
+        // filter out deleted documents
         List<Document> filteredRecentDocuments = recentDocuments.stream().filter(document -> !document.getCateTags().equals("del")).toList();
+
+        // loại bỏ các tài liệu chưa được duyệt
+        filteredRecentDocuments = filteredRecentDocuments.stream().filter(Document::isApproved).toList();
+
         model.addAttribute("recentDocuments", filteredRecentDocuments);
 
         // get data from current user
@@ -106,7 +130,13 @@ public class UserNavigationController {
     public String showRecommendedDocuments(Model model) {
         // Lấy danh sách tài liệu được đề xuất
         List<Document> recommendedDocuments = documentService.getRecommendedDocuments();
+
+        // filter out deleted documents
         List<Document> filteredRecommendedDocuments = recommendedDocuments.stream().filter(document -> !document.getCateTags().equals("del")).toList();
+
+        // loại bỏ các tài liệu chưa được duyệt
+        filteredRecommendedDocuments = filteredRecommendedDocuments.stream().filter(Document::isApproved).toList();
+
         model.addAttribute("recommendedDocuments", filteredRecommendedDocuments);
 
         // get data from current user
@@ -141,7 +171,13 @@ public class UserNavigationController {
     public String searchByTag(@RequestParam("tag") String tag, Model model) {
         // get documents by tag
         List<Document> documents = documentService.getDocumentsByTag(tag);
+
+        // filter out deleted documents
         List<Document> filteredDocuments = documents.stream().filter(document -> !document.getCateTags().equals("del")).toList();
+
+        // loại bỏ các tài liệu chưa được duyệt
+        filteredDocuments = filteredDocuments.stream().filter(Document::isApproved).toList();
+
         model.addAttribute("documents", filteredDocuments);
 
         model.addAttribute("tag", tag);
@@ -178,7 +214,13 @@ public class UserNavigationController {
     public String searchByUniversity(@RequestParam("uni") String university, Model model) {
         // get documents by university
         List<Document> documents = documentService.getDocumentsByUniversity(university);
+
+        // filter out deleted documents
         List<Document> filteredDocuments = documents.stream().filter(document -> !document.getCateTags().equals("del")).toList();
+
+        // loại bỏ các tài liệu chưa được duyệt
+        filteredDocuments = filteredDocuments.stream().filter(Document::isApproved).toList();
+
         model.addAttribute("documents", filteredDocuments);
 
         model.addAttribute("university", university);
