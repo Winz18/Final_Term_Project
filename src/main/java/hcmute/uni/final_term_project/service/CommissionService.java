@@ -107,4 +107,13 @@ public class CommissionService {
             throw new IllegalArgumentException("Commission must be linked to a valid document.");
         }
     }
+
+    public Optional<Object> findCommissionByDocument(Document doc) {
+        return Optional.ofNullable(commissionRepository.findByDocument(doc));
+    }
+
+    // tìm hoa hồng theo user và doc
+    public Optional<Object> findCommissionByUserAndDocument(User user, Document doc) {
+        return Optional.ofNullable(commissionRepository.findByUserAndDocument(user, doc));
+    }
 }

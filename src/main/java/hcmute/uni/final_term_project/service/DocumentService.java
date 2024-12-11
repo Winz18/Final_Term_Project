@@ -185,4 +185,14 @@ public class DocumentService {
     public List<String> getPopularUniversities() {
         return documentRepository.findPopularUniversities();
     }
+
+    public void setTag(Long documentId, String del) {
+        Optional<Document> optionalDocument = documentRepository.findById(documentId);
+        if (optionalDocument.isEmpty()) {
+            throw new IllegalArgumentException("Document with ID " + documentId + " does not exist.");
+        }
+        Document document = optionalDocument.get();
+        document.setCateTags(del);
+        documentRepository.save(document);
+    }
 }

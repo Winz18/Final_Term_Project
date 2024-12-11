@@ -1,9 +1,12 @@
 package hcmute.uni.final_term_project.controller.user;
 
 import hcmute.uni.final_term_project.entity.Comment;
+import hcmute.uni.final_term_project.entity.Commission;
 import hcmute.uni.final_term_project.entity.Document;
+import hcmute.uni.final_term_project.repository.DocumentRepository;
 import hcmute.uni.final_term_project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -32,6 +35,9 @@ public class UserDocumentController {
     private final LikesService likesService;
     private final CommentService commentService;
     private final DownloadService downloadService;
+    private final CommissionService commissionService;
+    private final ConversionService conversionService;
+    private final DocumentRepository documentRepository;
 
     @Autowired
     public UserDocumentController(DocumentService documentService,
@@ -39,13 +45,17 @@ public class UserDocumentController {
                                   ViewHistoryService viewHistoryService,
                                   LikesService likesService,
                                   CommentService commentService,
-                                  DownloadService downloadService) {
+                                  DownloadService downloadService,
+                                  CommissionService commissionService, ConversionService conversionService, DocumentRepository documentRepository) {
         this.documentService = documentService;
         this.userService = userService;
         this.viewHistoryService = viewHistoryService;
         this.likesService = likesService;
         this.commentService = commentService;
         this.downloadService = downloadService;
+        this.commissionService = commissionService;
+        this.conversionService = conversionService;
+        this.documentRepository = documentRepository;
     }
 
     // endpoint for user document page
@@ -53,6 +63,9 @@ public class UserDocumentController {
     public String showMyDocumentPage(Model model) {
         // Lấy danh sách tài liệu do user hiện tại sở hữu
         List<Document> myDocuments = documentService.getDocumentsByOwner(userService.getCurrentUser());
+
+        // Loại bỏ các document có tag = "del"
+        myDocuments = myDocuments.stream().filter(document -> !document.getCateTags().equals("del")).toList();
         model.addAttribute("myDocuments", myDocuments);
 
         // Get info for sidebar
@@ -73,7 +86,7 @@ public class UserDocumentController {
 
         // Chỉ vip member mới được xem tài liệu vip
         if (doc.isVIP() && !userService.getCurrentUser().isVIP()) {
-            return "redirect:/user/upgrade";
+            return "redirect:/user/vip-member";
         }
 
         model.addAttribute("document", doc);
@@ -347,8 +360,9 @@ public class UserDocumentController {
             throw new IllegalArgumentException("Failed to delete thumbnail file.");
         }
 
-        // Xóa tài liệu khỏi cơ sở dữ liệu
-        documentService.deleteDocument(doc);
+        // (set tag = del)
+        documentService.setTag(documentId, "del");
+
 
         // Chuyển hướng về trang tài liệu của tôi
         return "redirect:/user/my-documents";
@@ -393,8 +407,19 @@ public class UserDocumentController {
                 if (!downloadService.userHasDownloadedDocument(userService.getCurrentUser(), doc)) {
                     downloadService.addDownload(userService.getCurrentUser(), doc);
                     documentService.incrementDownloads(doc.getDocId());
-                }
 
+                    // Chi tiền huê hồng cho người dùng khi có người tải xuống tài liệu của họ
+                    if (doc.isVIP() && doc.getOwner().isVIP() && userService.getCurrentUser().isVIP()) {
+
+                        Commission commission = new Commission();
+                        commission.setDocument(doc);
+                        commission.setUser(doc.getOwner());
+                        commission.setValue(0.01);
+                        commission.setDate(LocalDateTime.now());
+                        commission.setPaid(true);
+                        commissionService.saveOrUpdateCommission(commission);
+                    }
+                }
                 // Trả về file tài liệu
                 return ResponseEntity.ok()
                         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")

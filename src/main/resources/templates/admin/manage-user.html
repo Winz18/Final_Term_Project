@@ -83,7 +83,7 @@
                             <td th:text="${iterStat.index + 1}">1</td>
                             <td>
                                 <img th:src="${data.user.avatar != null ? data.user.avatar : 'https://via.placeholder.com/50'}"
-                                     th:alt="${data.user.name}" class="rounded-circle">
+                                     th:alt="${data.user.name}" class="rounded-circle" style="width: 30px; height: 30px;">
                             </td>
                             <td th:text="${data.user.name}">John Doe</td>
                             <td th:text="${data.user.email}">john@example.com</td>

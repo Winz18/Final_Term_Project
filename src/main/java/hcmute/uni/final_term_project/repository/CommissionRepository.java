@@ -34,4 +34,6 @@ public interface CommissionRepository extends JpaRepository<Commission, Long> {
 
     @Query("SELECT SUM(c.value) FROM Commission c WHERE YEAR(c.date) = YEAR(CURRENT_DATE)")
     long getYearlyRevenue();
+
+    Boolean findByUserAndDocument(User user, Document doc);
 }
