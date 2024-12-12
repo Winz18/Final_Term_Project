@@ -152,6 +152,11 @@ public class DocumentService {
             throw new IllegalArgumentException("Document owner must be a valid and existing user.");
         }
     }
+    public void approveDocument(Long DocumentId){
+        Document document = documentRepository.findById(DocumentId).orElse(null);
+        document.setApproved(true);
+        documentRepository.save(document);
+    }
   
     public List<String> getAllTags() {
         // Lấy tất cả các cate_tags từ bảng document và loại bỏ các giá trị null

@@ -75,7 +75,6 @@
                             <th>File Info</th>
                             <th>Document Details</th>
                             <th>Statistics</th>
-                            <th>Owner ID</th>
                             <th>Is VIP</th>
                             <th>Actions</th>
                         </tr>
@@ -100,7 +99,6 @@
                                 Likes: <span class="likes" th:text="${document.likes}"></span><br>
                                 Comments: 0
                             </td>
-                            <td th:text="${document.owner.getUserId()}"></td>
                             <td th:text="${document.isVIP ? 'Yes' : 'No'}"></td>
                             <td>
                                 <!-- Nút Edit với data-id -->
@@ -109,7 +107,27 @@
                                         onclick="openEditDocumentForm(this)">
                                     Edit
                                 </button>
-                                <button class="btn btn-danger btn-sm" th:data-id="${document.docId}" onclick="deleteDocument(this)">Delete</button>
+
+                                <!-- Nút Delete với data-id -->
+                                <button class="btn btn-danger btn-sm"
+                                        th:data-id="${document.docId}"
+                                        onclick="deleteDocument(this)">
+                                    Delete
+                                </button>
+
+                                <!-- Nút View với data-id -->
+                                <a class="btn btn-info btn-sm"
+                                   th:href="@{/user/view-detail/{data-id}(data-id=${document.docId})}">
+                                    View
+                                </a>
+
+                                <!-- Nút Approve với data-id -->
+                                <button class="btn btn-success btn-sm"
+                                        th:if="${document.isApproved} == false"
+                                        th:data-id="${document.docId}"
+                                        onclick="openApproveModal(this)">
+                                    Approve
+                                </button>
                             </td>
                         </tr>
                         </tbody>
@@ -236,7 +254,27 @@
         </div>
     </div>
 </div>
-
+<!-- Modal Approve -->
+<div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="approveModalLabel">Confirm Approval</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to approve this document?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form th:action="@{/admin/documents/approve}" method="post">
+                    <input type="hidden" name="docId" id="approveDocId">
+                    <button type="submit" class="btn btn-success">Approve</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     function openEditDocumentForm(button) {
         // Lấy docId từ thuộc tính data-id của nút
@@ -262,6 +300,7 @@
         const modal = new bootstrap.Modal(document.getElementById("editDocumentModal"));
         modal.show();
     }
+
     function deleteDocument(button) {
         const docId = button.getAttribute("data-id"); // Lấy docId từ thuộc tính data-id của nút
 
@@ -272,6 +311,13 @@
         const modal = new bootstrap.Modal(document.getElementById("deleteDocumentModal"));
         modal.show();
     }
+    function openApproveModal(button) {
+    const docId = button.getAttribute('data-id');
+    document.getElementById('approveDocId').value = docId;
+    const approveModal = new bootstrap.Modal(document.getElementById('approveModal'));
+    approveModal.show();
+    }
+
 </script>
 <footer th:insert="fragments/footer :: footer"></footer>
 </body>

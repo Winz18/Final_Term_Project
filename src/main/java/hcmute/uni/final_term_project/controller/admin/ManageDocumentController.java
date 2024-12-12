@@ -78,4 +78,14 @@ public class ManageDocumentController {
         }
         return "redirect:/admin/documents";
     }
+    @PostMapping("/admin/documents/approve")
+    public String approveDocument(@RequestParam Long docId, RedirectAttributes redirectAttributes) {
+        try {
+            documentService.approveDocument(docId);
+            redirectAttributes.addFlashAttribute("successMessage", "Document deleted successfully.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete document. Please try again.");
+        }
+        return "redirect:/admin/documents";
+    }
 }
